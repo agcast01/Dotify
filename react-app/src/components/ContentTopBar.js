@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { useHistory } from "react-router-dom"
+import { NavLink, useHistory } from "react-router-dom"
 
 function ContentTopBar() {
     const history = useHistory();
@@ -17,8 +17,8 @@ function ContentTopBar() {
                     </span></button>
                 </div>
                 <div className="auth-buttons">
-                    <button id="sign-up">Sign Up</button>
-                    <button id='login'>Log in</button>
+                    <NavLink to='/signup' id="sign-up">Sign Up</NavLink>
+                    <NavLink to='/login' id='login'>Log in</NavLink>
                 </div>
             </div>
         )

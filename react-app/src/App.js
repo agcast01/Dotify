@@ -3,10 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
 import { authenticate } from './store/session';
 import SideBar from './components/SideBar';
 import ContentTopBar from './components/ContentTopBar';
@@ -28,13 +24,24 @@ function App() {
 
   return (
     <BrowserRouter>
-      <SideBar />
-      <div className='content'>
-        <ContentTopBar />
-        <div className='main-content'>
+      <Switch>
+        <Route path={'/signup'}>
+          <SignUpForm/>
+        </Route>
+        <Route path={'/login'}>
+          <LoginForm />
+        </Route>
+        <Route path={'/'}>
+        <SideBar />
+        <div className='content'>
+          <ContentTopBar />
+          <div className='main-content'>
+          </div>
         </div>
-      </div>
+        </Route>
+      </Switch>
     </BrowserRouter>
+
   );
 }
 

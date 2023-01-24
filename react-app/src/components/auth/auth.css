@@ -1,0 +1,126 @@
+.form {
+    color: black;
+    width: 450px;
+    margin: auto;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form > * {
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.form > div > label {
+    font-weight: bold;
+    display: block;
+}
+
+
+
+.form > div > input, select , .birthday input{
+    height: 48px;
+    width: 100%;
+    border-radius: 5px;
+    border: solid 1px black;
+    padding: 8px 14px;
+    box-sizing: border-box;
+}
+
+
+input:focus-visible {
+    border: solid 3px black;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.birthday {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    justify-content: space-between;
+}
+
+#month {
+    width: 45%;
+}
+
+#day {
+    width: 20%;
+}
+
+#year {
+    width: 25%;
+}
+
+#label {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#sign-up-submit {
+    margin: auto;
+    background-color: #1ed760;
+    border: none;
+    padding: 12px 48px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 24px;
+}
+
+#try-login {
+    text-align: center;
+}
+
+#try-login a{
+    color: rgb(29 185 84);
+    text-decoration: underline;
+}
+
+#gender-radio {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#gender-radio span {
+    padding: 4px 0;
+}
+
+#gender-radio > span > * {
+    display: inline-block;
+}
+
+#gender-radio label {
+    padding: 0 24px 0 12px;
+}
+
+.radio {
+    border: 3px solid rgb(29 185 84);
+}
+
+.radio:checked{
+    border: 3px solid rgb(29 185 84);
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+ .input-error {
+    border: 1px solid red !important; 
+    outline: none;
+}
+.input-error:focus-visible {
+    border: 3px solid red !important;
+    outline: none;
+}

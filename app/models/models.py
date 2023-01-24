@@ -45,7 +45,7 @@ class Song(db.Model, UserMixin):
     id = Column(Integer, primary_key=True)
     title = Column(String, nullable=False)
     userId = Column(String, ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    url = Column(String, nullable=False)
+    file_name = Column(String, nullable=False)
 
     user = db.relationship('User', back_populates='songs')
 
@@ -53,5 +53,5 @@ class Song(db.Model, UserMixin):
         return {
             'id': self.id,
             'title': self.title,
-            'url': self.url
+            'file_name': self.file_name
         }

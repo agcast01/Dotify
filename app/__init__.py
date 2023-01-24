@@ -7,6 +7,7 @@ from flask_login import LoginManager
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.song_routes import song_routes
 from .seeds import seed_commands
 from .config import Config
 import boto3
@@ -29,6 +30,7 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(song_routes, url_prefix='/api/songs')
 db.init_app(app)
 Migrate(app, db)
 
@@ -42,6 +44,7 @@ CORS(app)
 # request made over http is redirected to https.
 # Well.........
 s3 = boto3.resource('s3')
+print(s3)
 
 @app.before_request
 def https_redirect():

@@ -1,1 +1,188 @@
 /* TODO Add site wide styles */
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+#root {
+    height: 100%;
+    width: 100vw;
+    display: flex;
+}
+
+.sidebar {
+    width: 241px;
+    background-color: black;
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+ul,
+li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #121212;
+}
+
+#content-top-bar {
+    height: 64px;
+    position: sticky;
+    top: 0;
+    background-color: #0f0f0f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.nav-arrow {
+    background-color: #090909;
+    border-radius: 50%;
+    color: white;
+    border: none;
+    height: 32px;
+    width: 32px;
+    margin-right: 20px;
+}
+
+.main-content {
+    background: rgb(31,31,31);
+    background: linear-gradient(90deg, rgba(31,31,31,0.31) 0%, rgba(18,18,18,1) 100%);
+}
+
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+}
+
+.sidebar-links>li {
+    padding: 0 8px;
+}
+
+.sidebar-link {
+    padding: 0 16px;
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    height: 40px;
+    color: #b3b3b3;
+    background-color: transparent;
+}
+
+.sidebar-link>.material-symbols-outlined {
+    margin-right: 10px;
+}
+
+#logo {
+    height: 66px;
+    text-align: center;
+}
+
+#library-icon {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48
+}
+
+#sign-up {
+    color: #A7A7A7;
+    background-color: #101010;
+    border: none;
+    font-size: 16px;
+    margin: 8px 32px 8px 8px;
+    font-weight: bold;
+}
+
+#sign-up:hover {
+    color: white;
+    font-size: 18px;
+}
+
+#login {
+    color: black;
+    background-color: white;
+    border: none;
+    font-size: 16px;
+    padding: 8px 32px;
+    border-radius: 24px;
+    font-weight: bold;
+    height: 48px;
+}
+
+#login:hover {
+    font-size: 18px;
+}
+
+.song-navbar {
+    margin-top: 24px;
+}
+
+.song-navbar button {
+    padding: 8px 24px;
+    background-color: transparent;
+    border: none;
+}
+.song-navbar button:hover {
+    cursor: pointer;
+}
+
+#create-icon {
+    background-color: #b3b3b3;
+    color: black;
+    border-radius: 2px;
+}
+
+#liked-icon {
+    background: rgb(47, 13, 156);
+    background: linear-gradient(135deg, rgba(47, 13, 156, 1) 0%, rgba(126, 147, 154, 1) 100%);
+    border-radius: 2px;
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+}
+
+.sidebar-link:hover{
+    color: white;
+}
+
+.sidebar-link:hover #create-icon {
+    background-color: white;
+}
+
+.active {
+    color: white;
+}
+
+.inactive {
+    color:#b3b3b3;
+}
+
+button {
+    cursor: pointer;
+}

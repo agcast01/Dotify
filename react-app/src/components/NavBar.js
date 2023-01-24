@@ -1,34 +1,43 @@
 
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 
 const NavBar = () => {
+  const history = useHistory()
+
+  const [path, setPath] = useState(window.location.pathname)
+
   return (
     <nav>
-      <ul>
+      <ul className='sidebar-links'>
         <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            Home
-          </NavLink>
+
+          <button onClick={() => {history.push('/'); setPath('/')}} className={path === '/'? 'sidebar-link active' :'sidebar-link'}>
+            <span class="material-symbols-outlined home">
+              home
+            </span>
+            <span>Home</span>
+          </button>
         </li>
         <li>
-          <NavLink to='/login' exact={true} activeClassName='active'>
-            Login
-          </NavLink>
+
+          <button onClick={() => {history.push('/search'); setPath('/search')}}  className={path === '/search'? 'sidebar-link active' :'sidebar-link'}>
+            <span class="material-symbols-outlined">
+              search
+            </span>
+
+            <span>Search</span>
+          </button>
         </li>
         <li>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
-          </NavLink>
-        </li>
-        <li>
-          <LogoutButton />
+
+          <button onClick={() => {history.push('/playlists'); setPath('/playlists')}} className={path === '/playlists'? 'sidebar-link active' :'sidebar-link'}>
+            <span class="material-symbols-outlined" id='library-icon'>
+              web_stories
+            </span>
+            <span>Your Library</span>
+          </button>
         </li>
       </ul>
     </nav>

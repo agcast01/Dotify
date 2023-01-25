@@ -5,7 +5,6 @@ import LogoutButton from "./auth/LogoutButton";
 
 function ContentTopBar() {
     const history = useHistory();
-    console.log(history)
     const user = useSelector(state => state.session.user)
     const [dropMenu, setDropMenu] = useState(false)
 

@@ -22,19 +22,15 @@ export const load = () => async (dispatch) => {
     if(response.ok) {
         const data = await response.json();
         if(data.errors) return
-        let songs = {}
-        data.forEach(song => songs[song.id] = song);
-        dispatch(loadSongs(songs))
+        dispatch(loadSongs(data))
     }
 }
 
-export const upload = (song) => async (dispatch) => {
+export const upload = (data) => async (dispatch) => {
+    console.log(data)
     const response = await fetch('/api/songs/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(song)
+        method: 'post',
+        body: data
     });
     
     if (response.ok) {

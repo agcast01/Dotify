@@ -6,6 +6,7 @@ import SignUpForm from './components/auth/SignUpForm';
 import { authenticate } from './store/session';
 import SideBar from './components/SideBar';
 import ContentTopBar from './components/ContentTopBar';
+import UploadSongForm from './components/Songs/UploadSongForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,6 +31,9 @@ function App() {
         </Route>
         <Route path={'/login'}>
           <LoginForm />
+        </Route>
+        <Route path={'/new-song'}>
+          <UploadSongForm />
         </Route>
         <Route path={'/'}>
         <SideBar />

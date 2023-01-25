@@ -43,6 +43,7 @@ function ContentTopBar() {
                             arrow_drop_up
                             </span>
                             <div id='drop-down'>
+                                <div onClick={() => history.push('/new-song')}>Upload Song</div>
                                 <LogoutButton />
                             </div>
                             </>

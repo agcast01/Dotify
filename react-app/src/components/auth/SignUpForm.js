@@ -22,6 +22,7 @@ const SignUpForm = () => {
   const [monthError, setMonthError] = useState('');
   const [dayError, setDayError] = useState('')
   const [yearError, setYearError] = useState('');
+  const [genderError, setGenderError] = useState('')
 
   useEffect(() => {
     if (!year || year < 1900 || year > 9999) return setYearError('Enter a valid year.')
@@ -68,11 +69,13 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    if(!gender) return setGenderError('Select your gender')
     if (email === confEmail) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, email, password, month, day, year, gender));
       if (data) {
         setErrors(data)
       }
+      return <Redirect to='/'/>
     }
   };
 
@@ -121,6 +124,13 @@ const SignUpForm = () => {
       <div id='logo'>Dotify</div>
       <h1>Sign up for free to start listening</h1>
       <p id='label'>Sign up with your email address</p>
+      <ul>
+        {errors.map(error => (
+          <li key={error} className='error'>
+            {error}
+          </li>
+        ))}
+      </ul>
       <div>
         <label>What's your email?</label>
         <input
@@ -223,29 +233,29 @@ const SignUpForm = () => {
         <p>What's your gender?</p>
         <div id='gender-radio'>
           <span>
-            <input type='radio' name='gender' id='male' value='male' className='radio' onChange={e => setGender(e.target.value)} />
+            <input type='radio' name='gender' id='male' value='male' className='radio' onChange={e => {setGender(e.target.value); setGenderError('')}} />
             <label for='male'>Male</label>
           </span>
           <span>
-            <input type='radio' name='gender' id='female' value='female' className='radio' onChange={e => setGender(e.target.value)} />
+            <input type='radio' name='gender' id='female' value='female' className='radio' onChange={e => {setGender(e.target.value); setGenderError('')}} />
             <label for='female'>Female</label>
           </span>
           <span>
-            <input type='radio' name='gender' id='non-binary' value='non-binary' className='radio' onChange={e => setGender(e.target.value)} />
+            <input type='radio' name='gender' id='non-binary' value='non-binary' className='radio' onChange={e => {setGender(e.target.value); setGenderError('')}} />
             <label for='non-binary'>Non-binary</label>
           </span>
           <span>
-            <input type='radio' name='gender' id='other' value='other' className='radio' onChange={e => setGender(e.target.value)} />
+            <input type='radio' name='gender' id='other' value='other' className='radio' onChange={e => {setGender(e.target.value); setGenderError('')}} />
             <label for='other'>Other</label>
           </span>
           <span>
-            <input type='radio' name='gender' id='prefer' value='prefer' className='radio' onChange={e => setGender(e.target.value)} />
+            <input type='radio' name='gender' id='prefer' value='prefer' className='radio' onChange={e => {setGender(e.target.value); setGenderError('')}} />
             <label for='prefer'>Prefer not to say</label>
           </span>
         </div>
       </div>
       <div>
-        <button type='submit' id='sign-up-submit'>Sign Up</button>
+        <button type='submit' id='sign-up-submit' disabled={userError || emailError || emailConfError || passwordError || monthError || dayError || yearError || genderError}>Sign Up</button>
       </div>
       <div>
         <p id='try-login'>Have an account? <Link to='/login'>Log In</Link>.</p>

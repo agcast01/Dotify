@@ -1,10 +1,10 @@
 .form {
     color: black;
     width: 450px;
-    margin: auto;
     font-size: 14px;
     display: flex;
     flex-direction: column;
+    margin: auto;
 }
 
 .form > * {
@@ -124,3 +124,51 @@ input::-webkit-inner-spin-button {
     border: 3px solid red !important;
     outline: none;
 }
+
+#login-header {
+    height: 68px;
+    margin: 0 0 30px;
+    width: 100vw;
+    color: black;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+
+.login-button {
+    margin: auto;
+    background-color: #1ed760;
+    border: none;
+    padding: 12px 48px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 24px;
+}
+
+#try-signup {
+    color: black;
+    margin: auto;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    border-top:1px solid rgba(0, 0, 0, .1);
+}
+
+#try-signup button {
+    padding: 13px 31px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: transparent;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, .3);
+    border-radius: 30px;
+}
+
+#try-signup button:hover {
+    border: 1px solid rgba(0, 0, 0, .8);
+    outline: none;
+}
+

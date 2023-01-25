@@ -186,3 +186,59 @@ li {
 button {
     cursor: pointer;
 }
+
+#profile {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    border-radius: 16px;
+    height: 32px;
+    padding: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+#active-profile {
+    display: flex;
+    align-items: center;
+    background-color: #282828;
+    border-radius: 16px;
+    height: 32px;
+    padding: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+#active-profile .material-symbols-outlined:first-of-type {
+    background-color: #535353;
+    border-radius: 50%;
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 200,
+    'GRAD' 0,
+    'opsz' 24
+}
+
+#profile .material-symbols-outlined:first-of-type {
+    background-color: #535353;
+    border-radius: 50%;
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 200,
+    'GRAD' 0,
+    'opsz' 24
+}
+#drop-down {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #282828;
+    width: 240px;
+    padding: 4px;
+    font-size: 14px;
+}
+
+#drop-down > * {
+    padding: 12px 8px 12px 12px;
+    cursor: pointer;
+}

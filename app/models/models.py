@@ -57,5 +57,6 @@ class Song(db.Model, UserMixin):
         return {
             'id': self.id,
             'title': self.title,
-            'file_name': self.file_name
+            'file_name': self.file_name,
+            'user': self.user.username
         }

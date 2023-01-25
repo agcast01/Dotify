@@ -21,7 +21,7 @@ def upgrade():
     op.create_table('songs',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(), nullable=False),
-    sa.Column('userId', sa.String(), nullable=False),
+    sa.Column('userId', sa.Integer(), nullable=False),
     sa.Column('file_name', sa.String(), nullable=False),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')

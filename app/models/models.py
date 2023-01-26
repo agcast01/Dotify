@@ -97,6 +97,7 @@ class Playlist(db.Model, UserMixin):
     title = Column(String, nullable=False)
     description = Column(String)
     userId = Column(Integer, ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    imageUrl = Column(String)
 
     user = db.relationship('User', back_populates='playlists')
     songs = db.relationship(

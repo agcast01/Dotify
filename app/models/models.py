@@ -84,7 +84,7 @@ class Song(db.Model, UserMixin):
             'id': self.id,
             'title': self.title,
             'file_name': self.file_name,
-            'user': self.user.username
+            'user': self.user.username,
         }
 
 class Playlist(db.Model, UserMixin):
@@ -104,3 +104,12 @@ class Playlist(db.Model, UserMixin):
         secondary=song_playlist,
         back_populates='playlists'
     )
+
+    def to_dict(self):
+        return {
+            "id" : self.id,
+            'title': self.title,
+            'description': self.description,
+            'user': self.user.username,
+            'songs': [song.to_dict() for song in self.songs]
+        }

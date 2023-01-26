@@ -27,7 +27,7 @@ function UploadSongForm() {
         }
 
         await dispatch(songReducer.upload(formData))
-        return history.push('/')
+        return history.push('/user/songs')
     }
 
     if(user === null) return <Redirect to={'/login'}/>

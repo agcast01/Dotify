@@ -26,8 +26,17 @@ export const load = () => async (dispatch) => {
     }
 }
 
+
+export const loadUser = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/users/${userId}/songs`);
+    if(response.ok) {
+        const data = await response.json();
+        if(data.errors) return
+        dispatch(loadSongs(data))
+    }
+}
+
 export const upload = (data) => async (dispatch) => {
-    console.log(data)
     const response = await fetch('/api/songs/', {
         method: 'post',
         body: data
@@ -44,6 +53,20 @@ export const upload = (data) => async (dispatch) => {
         } 
     } else {
         return ['An error occurred. Please try again.']
+    }
+}
+
+export const update = (data, songId) => async (dispatch) => {
+    const response = await fetch(`/api/songs/${songId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+
+    if(response.ok) {
+        dispatch(uploadSong(data))
     }
 }
 

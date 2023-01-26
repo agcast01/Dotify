@@ -1,11 +1,11 @@
 import NavBar from "./NavBar"
 import SongPlaylistNavBar from "./SongPlaylistNavBar"
 
-function SideBar(){
+function SideBar({path, setPath}){
     return(
         <div className="sidebar">
             <div id='logo'>Spotify</div>
-            <NavBar />
+            <NavBar path={path} setPath={setPath}/>
             <SongPlaylistNavBar />
             
         </div>

@@ -2,6 +2,7 @@ import {useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import * as playlistReducer from '../../store/playlist'
+import { authenticate } from '../../store/session'
 
 function CreatePlaylistButton() {
     const dispatch = useDispatch()
@@ -12,8 +13,11 @@ function CreatePlaylistButton() {
 
     async function handleClick() {
         if( user === null ) return toggleSignUp(!signUp)
-
-        await dispatch()
+        const title = `Playlist #${user.playlists.length + 1}`
+        const userId = user.id
+        const playlistId = await dispatch(playlistReducer.create({title, userId}))
+        await dispatch(authenticate())
+        history.push(`/playlists/${playlistId}`)
 
     }
 

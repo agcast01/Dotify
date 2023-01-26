@@ -55,8 +55,8 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'songs': [song.title for song in self.songs],
-            'playlists': [playlist.title for playlist in self.playlists]
+            'songs': [song.to_dict() for song in self.songs],
+            'playlists': [{'title': playlist.title, 'id': playlist.id} for playlist in self.playlists]
         }
 
 
@@ -85,6 +85,7 @@ class Song(db.Model, UserMixin):
             'id': self.id,
             'title': self.title,
             'file_name': self.file_name,
+            'description': self.description,
             'user': self.user.username,
         }
 
@@ -113,5 +114,6 @@ class Playlist(db.Model, UserMixin):
             'title': self.title,
             'description': self.description,
             'user': self.user.username,
-            'songs': [song.to_dict() for song in self.songs]
+            'songs': [song.to_dict() for song in self.songs],
+            'imageUrl': self.imageUrl
         }

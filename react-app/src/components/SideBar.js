@@ -1,4 +1,5 @@
 import NavBar from "./NavBar"
+import PlaylistNavbar from "./Playlists/PlaylistNavbar"
 import SongPlaylistNavBar from "./SongPlaylistNavBar"
 
 function SideBar({path, setPath}){
@@ -7,7 +8,7 @@ function SideBar({path, setPath}){
             <div id='logo'>Dotify</div>
             <NavBar path={path} setPath={setPath}/>
             <SongPlaylistNavBar />
-            
+            <PlaylistNavbar path={path}/>
         </div>
     )
 }

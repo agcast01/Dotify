@@ -26,16 +26,6 @@ export const load = () => async (dispatch) => {
     }
 }
 
-
-export const loadUser = (userId) => async (dispatch) => {
-    const response = await fetch(`/api/users/${userId}/songs`);
-    if(response.ok) {
-        const data = await response.json();
-        if(data.errors) return
-        dispatch(loadSongs(data))
-    }
-}
-
 export const upload = (data) => async (dispatch) => {
     const response = await fetch('/api/songs/', {
         method: 'post',
@@ -44,7 +34,7 @@ export const upload = (data) => async (dispatch) => {
     
     if (response.ok) {
         const data = await response.json();
-        dispatch(uploadSong(data))
+        await dispatch(uploadSong(data))
         return null;
     } else if (response.status < 500) {
         const data = await response.json();
@@ -66,7 +56,7 @@ export const update = (data, songId) => async (dispatch) => {
     })
 
     if(response.ok) {
-        const final = response.json()
+        const final = await response.json()
         dispatch(uploadSong(final))
     }
 }

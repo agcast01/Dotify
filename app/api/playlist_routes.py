@@ -71,15 +71,17 @@ def update_playlist(id):
 
     if form.validate_on_submit():
         new_playlist = Playlist.query.get(id)
-        form.populate_obj(new_playlist)
+        new_playlist.title = form.data['title']
+        new_playlist.description = form.data['description']
+
         
-        if request.files['image']:
+        if request.files:
             image = request.files['image']
             image.filename = get_unique_filename(image.filename)
             upload = upload_file_to_s3(image)
             url = upload['url']
             new_playlist.imageUrl = url
-
+        print(new_playlist)
         db.session.commit()
 
         return new_playlist.to_dict(), 201

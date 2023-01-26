@@ -22,7 +22,7 @@ export const load = () => async (dispatch) => {
     if(response.ok) {
         const data = await response.json()
         if(data.erros) return
-        dispatch(loadPlaylists(data))
+        await dispatch(loadPlaylists(data))
     }
 }
 
@@ -37,8 +37,8 @@ export const create = (data) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        dispatch(createPlaylist(data))
-        return null;
+        await dispatch(createPlaylist(data))
+        return data.id;
     } else if (response.status < 500) {
         const data = await response.json();
         if(data.errors) {
@@ -54,8 +54,8 @@ export const update = (data, playlistId) => async (dispatch) => {
     })
 
     if(response.ok) {
-        const final = response.json()
-        dispatch(createPlaylist(final))
+        const final = await response.json()
+        await dispatch(createPlaylist(final))
     }
 }
 
@@ -65,7 +65,7 @@ export const remove = (playlistId) => async (dispatch) => {
     })
 
     if ( response.ok ) {
-        dispatch(deletePlaylist(playlistId))
+        await dispatch(deletePlaylist(playlistId))
     }
 }
 

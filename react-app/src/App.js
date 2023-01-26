@@ -12,6 +12,8 @@ import UserSongs from './components/User/UserSongs';
 import { ThemeContext } from './components/Providers/ThemeProvider';
 import SingleSong from './components/Songs/SingleSong';
 import * as songReducer from './store/song'
+import * as playListReducer from './store/playlist'
+import Playlist from './components/Playlists/Playlist';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -22,6 +24,7 @@ function App() {
     (async () => {
       await dispatch(authenticate());
       await dispatch(songReducer.load())
+      await dispatch(playListReducer.load())
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -52,13 +55,16 @@ function App() {
                 {setTheme('')}
               </Route>
               <Route path={'/library'}>
-                <Library />
+                <Library setPath={setPath}/>
               </Route>
               <Route path={'/user/songs'}>
-                <UserSongs />
+                <UserSongs setPath={setPath}/>
               </Route>
               <Route path={'/songs/:songId'}>
                 <SingleSong setPath={setPath}/>
+              </Route>
+              <Route path={'/playlists/:playlistId'}>
+                <Playlist setPath={setPath}/>
               </Route>
             </Switch>
           </div>

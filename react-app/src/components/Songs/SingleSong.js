@@ -7,7 +7,7 @@ import EditSongModal from "./EditSongModal"
 function SingleSong({ setPath }) {
     setPath('/users/:songId')
     const { songId } = useParams()
-    const songs = useSelector(state => state.song)
+    const songs = useSelector(state => state.songs)
     const user = useSelector(state => state.session.user)
     const song = songs[songId]
 
@@ -16,7 +16,7 @@ function SingleSong({ setPath }) {
     const [options, setOptions] = useState(false)
 
     const title = () => {
-        if (user.username === song.user) {
+        if ( user !== null && user.username === song.user) {
             return (
                 <>
                     <h1 onClick={() => setShowEditModal(true)} id='editable-title'>{song.title}</h1>

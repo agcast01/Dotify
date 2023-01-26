@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as songReducer from '../../store/song'
 
-function EditSongModal({ song , setShowEditModal }) {
+function EditSongModal({ song, setShowEditModal }) {
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
@@ -11,9 +11,11 @@ function EditSongModal({ song , setShowEditModal }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await dispatch(songReducer.update({title, userId : user.id}, song.id))
+        await dispatch(songReducer.update({ title, userId: user.id }, song.id))
         setShowEditModal(false)
     }
+
+
     return (
         <div className="modal-background">
             <div className='modal edit'>

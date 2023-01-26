@@ -36,7 +36,8 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'songs': [song.title for song in self.songs]
         }
 
 

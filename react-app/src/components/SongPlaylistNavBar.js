@@ -4,7 +4,7 @@ function SongPlaylistNavBar() {
             <ul>
                 <li>
                     <button className="sidebar-link">
-                        <span class="material-symbols-outlined" id='create-icon'>
+                        <span className="material-symbols-outlined" id='create-icon'>
                             add
                         </span>
                         <span>
@@ -14,7 +14,7 @@ function SongPlaylistNavBar() {
                 </li>
                 <li>
                     <button className="sidebar-link">
-                        <span class="material-symbols-outlined" id='liked-icon'>
+                        <span className="material-symbols-outlined" id='liked-icon'>
                             favorite
                         </span>
                         <span>

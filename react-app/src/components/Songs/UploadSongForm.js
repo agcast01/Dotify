@@ -1,29 +1,33 @@
 import React, { useState } from "react"
-import { useSelector } from "react-redux"
-import { Redirect } from "react-router-dom"
-import { uploadFile } from 'react-s3';
+import { useDispatch, useSelector } from "react-redux"
+import { Redirect, useHistory } from "react-router-dom"
+import * as songReducer from '../../store/song'
 
 function UploadSongForm() {
+    const history = useHistory()
+    const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
 
     const [title, setTitle] = useState('')
-    const fileInput = React.createRef()
+    const [fileError, setFileError] = useState('')
+    const [song, setSong] = useState('')
 
-    const config = {
-        bucketName: 'dotify-bucket',
-        dirName: 'songs',
-        region: 'us-east-1',
-        accessKeyId: 'AKIAULR2G7V7TFM75PRE',
-        secretAccessKey: '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'
-    }
-
-    function handleSubmit(e) {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        const file = fileInput.current.files[0]
         
-        uploadFile(file, config)
-            .then(data => console.log(data))
-            .catch(err => console.error(err))
+        const formData = new FormData()
+        formData.append('song', song)
+        formData.append("title", title);
+        formData.append("userId", user.id)
+        
+        if(!song.name.endsWith('.mp3') && !song.name.endsWith('.wav')) {
+            return setFileError('You must upload either an mp3 or wav file')
+        } else {
+            setFileError('')
+        }
+
+        await dispatch(songReducer.upload(formData))
+        return history.push('/user/songs')
     }
 
     if(user === null) return <Redirect to={'/login'}/>
@@ -37,6 +41,7 @@ function UploadSongForm() {
                     <input 
                         placeholder="Enter your title here."
                         value={title}
+                        accept='audio/*'
                         onChange={e => setTitle(e.target.value)}
                     />
                 </div>
@@ -44,8 +49,9 @@ function UploadSongForm() {
                     <label>Upload your file</label>
                     <input 
                         type="file"
-                        ref={fileInput}
+                        onChange={e => setSong(e.target.files[0])}
                     />
+                    {fileError && <p className="error">{fileError}</p>}
                 </div>
                 <button type='submit' className="login-button">Upload your song</button>
             </form>

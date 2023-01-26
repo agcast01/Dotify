@@ -22,19 +22,24 @@ export const load = () => async (dispatch) => {
     if(response.ok) {
         const data = await response.json();
         if(data.errors) return
-        let songs = {}
-        data.forEach(song => songs[song.id] = song);
-        dispatch(loadSongs(songs))
+        dispatch(loadSongs(data))
     }
 }
 
-export const upload = (song) => async (dispatch) => {
+
+export const loadUser = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/users/${userId}/songs`);
+    if(response.ok) {
+        const data = await response.json();
+        if(data.errors) return
+        dispatch(loadSongs(data))
+    }
+}
+
+export const upload = (data) => async (dispatch) => {
     const response = await fetch('/api/songs/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(song)
+        method: 'post',
+        body: data
     });
     
     if (response.ok) {
@@ -48,6 +53,20 @@ export const upload = (song) => async (dispatch) => {
         } 
     } else {
         return ['An error occurred. Please try again.']
+    }
+}
+
+export const update = (data, songId) => async (dispatch) => {
+    const response = await fetch(`/api/songs/${songId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+
+    if(response.ok) {
+        dispatch(uploadSong(data))
     }
 }
 

@@ -7,6 +7,9 @@ import logging
 import boto3
 from botocore.exceptions import ClientError
 import os
+from app.aws_config import (
+    upload_file_to_s3, allowed_file, get_unique_filename
+)
 
 s3 = boto3.resource('s3')
 
@@ -32,7 +35,7 @@ def songs():
     Query for all songs and returns them in a list of song dictionaries
     """
     songs = Song.query.all()
-    return {'songs': [song.to_dict() for song in songs]}, 200
+    return {song.id : song.to_dict() for song in songs}, 200
 
 @song_routes.route('/<int:id>')
 def single_song(id):
@@ -51,10 +54,19 @@ def upload_song():
     if form.validate_on_submit():
         new_song = Song()
         form.populate_obj(new_song)
+        
+        song = request.files['song']
+        song.filename = get_unique_filename(song.filename)
+        upload = upload_file_to_s3(song)
+        print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAA', song)
+        url = upload['url']
+        new_song.file_name = url
 
         db.session.add(new_song)
         db.session.commit()
+        
         return new_song.to_dict(), 201
+
     return validation_errors_to_error_messages(form.errors), 401
 
 @song_routes.route('/<int:id>', methods=['PUT'])
@@ -65,7 +77,8 @@ def update_song(id):
 
     if form.validate_on_submit():
         song = Song.query.get(id)
-        form.populate_obj(song)
+
+        song.title = form.data['title']
 
         db.session.commit()
         return song.to_dict(), 201

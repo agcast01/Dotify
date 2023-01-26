@@ -10,7 +10,6 @@ from .api.auth_routes import auth_routes
 from .api.song_routes import song_routes
 from .seeds import seed_commands
 from .config import Config
-import boto3
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -43,8 +42,6 @@ CORS(app)
 # Therefore, we need to make sure that in production any
 # request made over http is redirected to https.
 # Well.........
-s3 = boto3.resource('s3')
-print(s3)
 
 @app.before_request
 def https_redirect():

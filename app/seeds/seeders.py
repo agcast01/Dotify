@@ -35,29 +35,6 @@ def seed_data():
     db.session.add(fscm)
     db.session.commit()
 
-    presentation = Song(
-        user=tech, title='Presentation 2.0', file_name='2tech_audio-presentation-20.mp3'
-    )
-    rise = Song(
-        user=corpo, title='Rise', file_name='corporate-music-zone-rise.mp3'
-    )
-    history = Song(
-        user=fscm, title='History Repeats Itself', file_name='fscm-productions-history-repeats-itself.mp3'
-    )
-    neon = Song(
-        user=fsm_team, title='Neonscapes', file_name='fsm-team-escp-neonscapes.mp3'
-    )
-    pos_corpo = Song(
-        user=mixaund, title='Positive Corporate', file_name='mixaund-positive-corporate.mp3'
-    )
-
-    db.session.add(presentation)
-    db.session.add(rise)
-    db.session.add(history)
-    db.session.add(neon)
-    db.session.add(pos_corpo)
-    db.session.commit()
-
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

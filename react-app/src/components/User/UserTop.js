@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 
 function UserTop() {
     const user = useSelector(state => state.session.user)
-    const songs = useSelector(state => state.song)
+
     return (
         <>
             <span className='playlist-image'>

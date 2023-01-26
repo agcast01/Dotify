@@ -1,9 +1,8 @@
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-function Songs() {
-    let songs = useSelector(state => state.song);
-    
+function Songs({songs}) {
+    let i = 0
+    console.log(songs)
     return (
         <div>
             <div className="column-headers">
@@ -16,11 +15,11 @@ function Songs() {
                 </span>
             </div>
             <ul className="songs">
-                {Object.keys(songs).map((songId, i=1) =>(
-                    <li className='song' key={songId}>
-                       <p>{i}</p>
+                {songs.map(song => (
+                    <li className='song' key={song.id}>
+                       <p>{++i}</p>
                        <div>
-                            <Link to={`/songs/${songId}`} className="title">{songs[songId].title}</Link>
+                            <Link to={`/songs/${song.id}`} className="title">{song.title}</Link>
                         </div>
                         <p>Placeholder</p>
                         <p>Placeholder</p>

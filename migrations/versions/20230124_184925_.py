@@ -31,4 +31,6 @@ def downgrade():
     op.drop_column('users', 'year')
     op.drop_column('users', 'day')
     op.drop_column('users', 'month')
+    op.drop_table('song_playlist')
+    op.drop_table('playlists')
     # ### end Alembic commands ###

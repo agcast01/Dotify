@@ -32,7 +32,7 @@ const NavBar = ({path, setPath}) => {
         </li>
         <li>
 
-          <button onClick={() => { history.push('/library'); setPath('/library') }} className={path === '/library' ? 'sidebar-link active' : 'sidebar-link'}>
+          <button onClick={() => { history.push('/library')}} className={path === '/library' ? 'sidebar-link active' : 'sidebar-link'}>
             <span className="material-symbols-outlined" id='library-icon'>
               web_stories
             </span>

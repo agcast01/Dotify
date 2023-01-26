@@ -58,7 +58,6 @@ def upload_song():
         song = request.files['song']
         song.filename = get_unique_filename(song.filename)
         upload = upload_file_to_s3(song)
-        print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAA', song)
         url = upload['url']
         new_song.file_name = url
 

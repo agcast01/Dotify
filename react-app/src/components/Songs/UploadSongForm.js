@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Redirect, useHistory } from "react-router-dom"
+import { authenticate } from "../../store/session"
 import * as songReducer from '../../store/song'
 
 function UploadSongForm() {
@@ -27,6 +28,7 @@ function UploadSongForm() {
         }
 
         await dispatch(songReducer.upload(formData))
+        await dispatch(authenticate())
         return history.push('/user/songs')
     }
 

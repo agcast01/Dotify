@@ -1,6 +1,7 @@
 import Songs from "../Songs/Songs"
 
-function Library() {
+function Library({setPath}) {
+    setPath('/library')
     return (
         <>
         </>

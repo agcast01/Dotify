@@ -1,16 +1,11 @@
+import CreatePlaylistButton from "./Playlists/CreatePlaylistButton"
+
 function SongPlaylistNavBar() {
     return (
         <div className="song-navbar">
             <ul>
                 <li>
-                    <button className="sidebar-link">
-                        <span className="material-symbols-outlined" id='create-icon'>
-                            add
-                        </span>
-                        <span>
-                            Create Playlist
-                        </span>
-                    </button>
+                    <CreatePlaylistButton />
                 </li>
                 <li>
                     <button className="sidebar-link">

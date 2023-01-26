@@ -4,7 +4,7 @@ import SongPlaylistNavBar from "./SongPlaylistNavBar"
 function SideBar({path, setPath}){
     return(
         <div className="sidebar">
-            <div id='logo'>Spotify</div>
+            <div id='logo'>Dotify</div>
             <NavBar path={path} setPath={setPath}/>
             <SongPlaylistNavBar />
             

@@ -66,7 +66,8 @@ export const update = (data, songId) => async (dispatch) => {
     })
 
     if(response.ok) {
-        dispatch(uploadSong(data))
+        const final = response.json()
+        dispatch(uploadSong(final))
     }
 }
 

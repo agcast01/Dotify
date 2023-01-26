@@ -1,8 +1,8 @@
 from flask import Blueprint, request
 from flask_login import login_required
-from.auth_routes import validation_errors_to_error_messages
+from .auth_routes import validation_errors_to_error_messages
 from app.models import Song, db, Playlist
-from forms import PlaylistForm
+from ..forms import PlaylistForm
 import logging
 import boto3
 from botocore.exceptions import ClientError
@@ -56,11 +56,6 @@ def create_playlist():
         new_playlist = Playlist()
         form.populate_obj(new_playlist)
 
-        image = request.files['image']
-        image.filename = get_unique_filename(image.filename)
-        upload = upload_file_to_s3(image)
-        url = upload['url']
-        new_playlist.imageUrl = url
         db.session.add(new_playlist)
         db.session.commit()
 
@@ -70,7 +65,7 @@ def create_playlist():
 
 @playlist_routes.route('/<int:id>', methods=['PUT'])
 @login_required
-def create_playlist(id):
+def update_playlist(id):
     form = PlaylistForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 

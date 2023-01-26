@@ -55,7 +55,8 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'songs': [song.title for song in self.songs]
+            'songs': [song.title for song in self.songs],
+            'playlists': [playlist.title for playlist in self.playlists]
         }
 
 
@@ -74,7 +75,7 @@ class Song(db.Model, UserMixin):
 
     user = db.relationship('User', back_populates='songs')
     playlists = db.relationship(
-        "Song",
+        "Playlist",
         secondary=song_playlist,
         back_populates='songs'
     )
@@ -101,7 +102,7 @@ class Playlist(db.Model, UserMixin):
 
     user = db.relationship('User', back_populates='playlists')
     songs = db.relationship(
-        "Playlist",
+        "Song",
         secondary=song_playlist,
         back_populates='playlists'
     )

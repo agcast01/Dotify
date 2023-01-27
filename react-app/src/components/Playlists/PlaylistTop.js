@@ -30,7 +30,8 @@ function PlaylistTop({playlistId}) {
             <span className="playlist-data">
                 <p>PLAYLIST</p>
                 {title() || <h1>{playlist.title}</h1>}
-                <p>{playlist.user} • {playlist.songs.length} songs</p>
+                {playlist.description && <p className="description">{playlist.description}</p>}
+                <p className="playlist-stats">{playlist.user} • {playlist.songs.length} songs</p>
             </span>
         </div>
         {showModal && <DeletePlaylistModal song={playlist} setShowModal={setShowModal} />}

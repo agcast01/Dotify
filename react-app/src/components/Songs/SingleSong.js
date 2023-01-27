@@ -1,10 +1,13 @@
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import DeleteSong from "./DeleteSongModal"
 import EditSongModal from "./EditSongModal"
+import './songs.css'
+import * as playlistReducer from '../../store/playlist'
 
 function SingleSong({ setPath }) {
+    const dispatch = useDispatch()
     setPath('/users/:songId')
     const { songId } = useParams()
     const songs = useSelector(state => state.songs)
@@ -14,6 +17,8 @@ function SingleSong({ setPath }) {
     const [showModal, setShowModal] = useState(false)
     const [showEditModal, setShowEditModal] = useState(false)
     const [options, setOptions] = useState(false)
+    const [showPlaylists, setShowPlaylists] = useState(false)
+
 
     const title = () => {
         if ( user !== null && user.username === song.user) {
@@ -25,6 +30,11 @@ function SingleSong({ setPath }) {
             )
         } return false
     }
+
+    async function addToPlaylist(playlistId) {
+        await dispatch(playlistReducer.addSong(song.id, playlistId))
+    }
+
     return (
         <div>
             <div className="playlist-header">
@@ -45,7 +55,15 @@ function SingleSong({ setPath }) {
                 {options && (
                     <div id="options">
                         <button onClick={() => setShowEditModal(true)}>Edit Details</button>
+                        <button onClick={() => setShowPlaylists(!showPlaylists)}>Add to Playlist</button>
                         <button onClick={() => setShowModal(true)}>Delete</button>
+                        {showPlaylists && (
+                            <div id="playlist-list">
+                                {user.playlists.map(playlist => (
+                                    <button onClick={() => addToPlaylist(playlist.id)}>{playlist.title}</button>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 )}
             </div>}

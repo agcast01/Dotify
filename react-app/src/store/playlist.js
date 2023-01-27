@@ -59,6 +59,21 @@ export const update = (data, playlistId) => async (dispatch) => {
     }
 }
 
+export const addSong = (songId, playlistId) => async (dispatch) => {
+    const response = await fetch(`/api/playlists/${playlistId}`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({songId})
+    })
+
+    if(response.ok) {
+        const final = await response.json()
+        await dispatch(createPlaylist(final))
+    }
+}
+
 export const remove = (playlistId) => async (dispatch) => {
     const response = await fetch(`/api/playlists/${playlistId}`, {
         method: 'DELETE'
@@ -68,6 +83,7 @@ export const remove = (playlistId) => async (dispatch) => {
         await dispatch(deletePlaylist(playlistId))
     }
 }
+
 
 const initialState= {}
 

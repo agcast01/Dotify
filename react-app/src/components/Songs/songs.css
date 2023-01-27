@@ -1,0 +1,20 @@
+#playlist-list {
+    position: absolute;
+    top: 0;
+    left: 105%;
+    display: flex;
+    flex-direction: column;
+    background-color: #282828;
+    color: white;
+}
+
+#playlist-list > * {
+    padding: 8px 8px;
+    color: white;
+    white-space: nowrap;
+}
+
+#playlist-list > *:hover {
+   background-color: #3e3e3e;
+   box-sizing: border-box;
+}

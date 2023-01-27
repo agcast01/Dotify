@@ -78,6 +78,7 @@ def update_song(id):
         song = Song.query.get(id)
 
         song.title = form.data['title']
+        song.description = form.data['description']
 
         db.session.commit()
         return song.to_dict(), 201

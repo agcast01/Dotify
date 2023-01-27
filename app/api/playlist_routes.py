@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required
 from .auth_routes import validation_errors_to_error_messages
 from app.models import Song, db, Playlist
-from ..forms import PlaylistForm
+from ..forms import PlaylistForm, SongPlaylistForm
 import logging
 import boto3
 from botocore.exceptions import ClientError
@@ -85,6 +85,25 @@ def update_playlist(id):
         db.session.commit()
 
         return new_playlist.to_dict(), 201
+
+    return validation_errors_to_error_messages(form.errors), 401
+
+@playlist_routes.route('/<int:id>', methods=['POST'])
+@login_required
+def addSong(id):
+    playlist = Playlist.query.get(id)
+    
+    form = SongPlaylistForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    
+    if form.validate_on_submit():
+        song = Song.query.get(form.data['songId'])
+        
+        playlist.songs.append(song)
+
+        db.session.commit()
+
+        return playlist.to_dict(), 201
 
     return validation_errors_to_error_messages(form.errors), 401
 

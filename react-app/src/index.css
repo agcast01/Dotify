@@ -256,6 +256,10 @@ button {
     cursor: pointer;
 }
 
+#drop-down> *:hover {
+    background-color: #3e3e3e;
+}
+
 .playlist-info {
     padding: 0 20px 20px 20px;
     display: flex;
@@ -513,12 +517,18 @@ button {
     left: 24px;
 }
 
-#options>* {
+#options > button {
     padding: 12px 8px 12px 12px;
     cursor: pointer;
     width: fit-content;
     color: white;
     white-space: nowrap;
+    width: 100%;
+    text-align: left;
+}
+
+#options > button:hover {
+    background-color: #3e3e3e;
 }
 
 .center {

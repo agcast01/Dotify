@@ -48,6 +48,12 @@ function UploadSongForm() {
                     />
                 </div>
                 <div>
+                    <label>Enter the description of your song</label>
+                    <textarea 
+                        placeholder='Optional: Enter your description here.'
+                    />
+                </div>
+                <div>
                     <label>Upload your file</label>
                     <input 
                         type="file"
@@ -56,6 +62,7 @@ function UploadSongForm() {
                     {fileError && <p className="error">{fileError}</p>}
                 </div>
                 <button type='submit' className="login-button">Upload your song</button>
+                <button className="login-button" onClick={() => history.push('/user/songs')}>Cancel</button>
             </form>
         </>
     )

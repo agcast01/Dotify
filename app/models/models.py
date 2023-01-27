@@ -34,7 +34,7 @@ class User(db.Model, UserMixin):
     month = Column(Integer )
     day = Column(Integer)
     year = Column(Integer)
-    gender = Column(String)
+    gender = Column(String, nullable=False)
 
     songs = db.relationship('Song', back_populates='user')
     playlists = db.relationship('Playlist', back_populates='user')

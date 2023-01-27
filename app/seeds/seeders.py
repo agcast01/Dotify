@@ -4,25 +4,25 @@ from app.models import db, User, environment, SCHEMA, Song
 # Adds a demo user, you can add other users here if you want
 def seed_data():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
+        username='Demo', email='demo@aa.io', password='password', gender='male')
     marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
+        username='marnie', email='marnie@aa.io', password='password', gender='female')
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        username='bobbie', email='bobbie@aa.io', password='password', gender='male')
     tech = User(
-        username='2TECH-AUDIO', email='2tech@aa.io', password='password'
+        username='2TECH-AUDIO', email='2tech@aa.io', password='password', gender='other'
     )
     fsm_team = User(
-        username='FSM Team', email='FSM@aa.io', password='password'
+        username='FSM Team', email='FSM@aa.io', password='password', gender='other'
     )
     mixaund = User(
-        username='Mixaund', email='mixaund@aa.io', password='password'
+        username='Mixaund', email='mixaund@aa.io', password='password', gender='other'
     )
     corpo = User(
-        username='Corporate Music Zone', email='corpo@aa.io', password='password'
+        username='Corporate Music Zone', email='corpo@aa.io', password='password', gender='other'
     )
     fscm = User(
-        username='FSCM Productions', email='fscm@aa.io', password='password'
+        username='FSCM Productions', email='fscm@aa.io', password='password', gender='other'
     )
 
     db.session.add(demo)
@@ -47,8 +47,10 @@ def undo_seed():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.songs RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.playlists RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM users")
         db.session.execute("DELETE FROM songs")
+        db.session.execute("DELETE FROM playlists")
         
     db.session.commit()

@@ -16,6 +16,7 @@ import * as playListReducer from './store/playlist'
 import Playlist from './components/Playlists/Playlist';
 import AudioPlayer from './components/Songs/AudioPlayer';
 import { SongContext } from './components/Providers/SongContext';
+import LikedSongs from './components/User/LikedSongs';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -59,6 +60,9 @@ function App() {
               </Route>
               <Route path={'/library'}>
                 <Library setPath={setPath}/>
+              </Route>
+              <Route path={'/liked-songs'}>
+                <LikedSongs setPath={setPath}/>
               </Route>
               <Route path={'/user/songs'}>
                 <UserSongs setPath={setPath}/>

@@ -71,3 +71,70 @@
     justify-content: center;
     align-items: center;
 }
+
+.liked .material-symbols-outlined {
+    color: #1ED760;
+    
+}
+
+.liked-main {
+    width: 56px;
+    height: 56px;
+}
+
+.liked-main .material-symbols-outlined {
+    width: fit-content;
+    height: fit-content;
+    font-size: 32px;
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 32
+}
+
+.not-liked .material-symbols-outlined {
+    color: white;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 32
+    
+}
+
+.not-liked-main {
+    width: 56px;
+    height: 56px;
+}
+
+.not-liked-main .material-symbols-outlined{
+    width: fit-content;
+    height: fit-content;
+    font-size: 32px;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 32
+}
+
+#user-album {
+    font-size: 64px;
+}
+
+
+.liked-image {
+    width: 192px;
+    height: 192px;
+    background: rgb(47, 13, 156);
+    background: linear-gradient(135deg, rgba(47, 13, 156, 1) 0%, rgba(126, 147, 154, 1) 100%);
+    display: flex;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.391);
+    justify-content: center;
+    align-items: center;
+}
+
+#likes-top {
+    display: flex;
+}

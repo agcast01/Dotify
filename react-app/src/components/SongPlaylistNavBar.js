@@ -1,4 +1,5 @@
 import CreatePlaylistButton from "./Playlists/CreatePlaylistButton"
+import LikedSongsButton from "./User/LikedSongsButton"
 
 function SongPlaylistNavBar() {
     return (
@@ -8,14 +9,7 @@ function SongPlaylistNavBar() {
                     <CreatePlaylistButton />
                 </li>
                 <li>
-                    <button className="sidebar-link">
-                        <span className="material-symbols-outlined" id='liked-icon'>
-                            favorite
-                        </span>
-                        <span>
-                            Liked Songs
-                        </span>
-                    </button>
+                    <LikedSongsButton />
                 </li>
             </ul>
         </div>

@@ -30,7 +30,7 @@ const NavBar = ({path, setPath}) => {
             <span>Search</span>
           </button>
         </li>
-        <li>
+{/*         <li>
 
           <button onClick={() => { history.push('/library')}} className={path === '/library' ? 'sidebar-link active' : 'sidebar-link'}>
             <span className="material-symbols-outlined" id='library-icon'>
@@ -38,7 +38,7 @@ const NavBar = ({path, setPath}) => {
             </span>
             <span>Your Library</span>
           </button>
-        </li>
+        </li> */}
         <li>
           <button onClick={() => { history.push('/user/songs'); setPath('/user/songs') }} className={path === '/user/songs' ? 'sidebar-link active' : 'sidebar-link'}>
             <span className="material-symbols-outlined">

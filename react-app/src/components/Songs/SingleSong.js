@@ -6,6 +6,7 @@ import EditSongModal from "./EditSongModal"
 import './songs.css'
 import * as playlistReducer from '../../store/playlist'
 import { SongContext } from "../Providers/SongContext"
+import { dislike, like } from "../../store/session"
 
 function SingleSong({ setPath }) {
     const dispatch = useDispatch()
@@ -37,6 +38,23 @@ function SingleSong({ setPath }) {
         await dispatch(playlistReducer.addSong(song.id, playlistId))
     }
 
+    function checkLiked(songId) {
+        for (let song of user.likedSongs) {
+            if (song.id === songId) {
+                return true
+            }
+        }
+        return false
+    }
+
+    async function likeSong() {
+        if(!checkLiked(song.id)) {
+            await dispatch(like(song.id, user.id))
+            return
+        }
+        await dispatch(dislike(song.id, user.id))
+    }
+
     return (
         <div>
             <div className="playlist-header">
@@ -55,6 +73,9 @@ function SingleSong({ setPath }) {
                 <button className="play-button" onClick={() => setCurrentSong(song)}><span class="material-symbols-outlined">
                     play_arrow
                 </span></button>
+                {user !== null && <button className={checkLiked(song.id)?"liked liked-main" : "not-liked not-liked-main"} onClick={likeSong}><span class="material-symbols-outlined">
+                    favorite
+                </span></button>}
                 {showModal && <DeleteSong song={song} setShowModal={setShowModal} />}
                 {song.user === user.username && <div className="drop-div">
                     <button className="more-options" onClick={() => setOptions(!options)}>...</button>

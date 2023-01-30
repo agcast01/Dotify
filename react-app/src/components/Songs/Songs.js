@@ -1,8 +1,29 @@
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { dislike, like } from "../../store/session"
 
-function Songs({songs}) {
+function Songs({ songs }) {
+    const user = useSelector(state => state.session.user)
+    const dispatch = useDispatch()
     let i = 0
-    console.log(songs)
+
+    function checkLiked(songId) {
+        for (let song of user.likedSongs) {
+            if (song.id === songId) {
+                return true
+            }
+        }
+        return false
+    }
+
+    async function likeSong(songId) {
+        if (!checkLiked(songId)) {
+            await dispatch(like(songId, user.id))
+            return
+        }
+        await dispatch(dislike(songId, user.id))
+    }
+    
     return (
         <div>
             <div className="column-headers">
@@ -17,13 +38,16 @@ function Songs({songs}) {
             <ul className="songs">
                 {songs.map(song => (
                     <li className='song' key={song.id}>
-                       <p>{++i}</p>
-                       <div>
+                        <p>{++i}</p>
+                        <div>
                             <Link to={`/songs/${song.id}`} className="title">{song.title}</Link>
                         </div>
                         <p>Placeholder</p>
                         <p>Placeholder</p>
-                        <p>Placeholder</p>
+                        <div>
+                            {user !== null && <button className={checkLiked(song.id) ? "liked" : "not-liked"} onClick={() => likeSong(song.id)}><span class="material-symbols-outlined">
+                            favorite
+                        </span></button>}</div>
                     </li>
                 ))}
             </ul>

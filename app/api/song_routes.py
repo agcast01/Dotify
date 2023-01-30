@@ -1,7 +1,8 @@
 from flask import Blueprint, request
 from flask_login import login_required
 from app.models import Song, db, User
-from forms import SongForm, LikeForm
+from ..forms.song_form import SongForm
+from ..forms.like_form import LikeForm
 from.auth_routes import validation_errors_to_error_messages
 import logging
 import boto3
@@ -108,7 +109,7 @@ def like_song(id):
 
         db.session.commit()
 
-        return current_user, 201
+        return current_user.to_dict(), 201
     return validation_errors_to_error_messages(form.errors), 401
 
 @song_routes.route('/<int:id>/likes', methods=['DELETE'])
@@ -123,7 +124,11 @@ def dislike_song(id):
 
         song = Song.query.get(id)
 
-        print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', current_user.liked_songs.index(song))
+        songIndex = current_user.liked_songs.index(song)
 
-        return current_user, 201
+        del current_user.liked_songs[songIndex]
+
+        db.session.commit()
+
+        return current_user.to_dict(), 201
     return validation_errors_to_error_messages(form.errors), 401

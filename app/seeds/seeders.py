@@ -45,12 +45,12 @@ def seed_data():
 # it will reset the primary keys for you as well.
 def undo_seed():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.liked_songs RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.user_song_likes RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.songs RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.playlists RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("DELETE FROM liked_songs")
+        db.session.execute("DELETE FROM user_song_likes")
         db.session.execute("DELETE FROM users")
         db.session.execute("DELETE FROM songs")
         db.session.execute("DELETE FROM playlists")

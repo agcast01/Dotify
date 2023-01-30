@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required
-from app.models import Song, db
-from ..forms.song_form import SongForm
+from app.models import Song, db, User
+from forms import SongForm, LikeForm
 from.auth_routes import validation_errors_to_error_messages
 import logging
 import boto3
@@ -91,3 +91,39 @@ def delete_song(id):
     song = Song.query.get(id)
     db.session.delete(song)
     db.session.commit()
+
+@song_routes.route('/<int:id>/likes', methods=['POST'])
+@login_required
+def like_song(id):
+    form = LikeForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        userId = form.data['userId']
+        current_user = User.query.get(userId)
+
+        song = Song.query.get(id)
+
+        current_user.liked_songs.append(song)
+
+        db.session.commit()
+
+        return current_user, 201
+    return validation_errors_to_error_messages(form.errors), 401
+
+@song_routes.route('/<int:id>/likes', methods=['DELETE'])
+@login_required
+def dislike_song(id):
+    form = LikeForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        userId = form.data['userId']
+        current_user = User.query.get(userId)
+
+        song = Song.query.get(id)
+
+        print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', current_user.liked_songs.index(song))
+
+        return current_user, 201
+    return validation_errors_to_error_messages(form.errors), 401

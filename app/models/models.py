@@ -20,6 +20,23 @@ song_playlist = db.Table(
     schema = SCHEMA if environment == "production" else ''
 )
 
+user_song_likes = db.Table(
+    'user_song_likes',
+    db.Column(
+        'songId',
+        Integer,
+        ForeignKey(add_prefix_for_prod('songs.id')),
+        primary_key=True
+    ),
+    db.Column(
+        'userId',
+        Integer,
+        ForeignKey(add_prefix_for_prod('users.id')),
+        primary_key=True
+    ),
+    schema = SCHEMA if environment == "production" else ''
+
+)
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -39,6 +56,12 @@ class User(db.Model, UserMixin):
     songs = db.relationship('Song', back_populates='user')
     playlists = db.relationship('Playlist', back_populates='user')
 
+    liked_songs = db.relationship(
+        "Song",
+        secondary=user_song_likes,
+        back_populates='user_likes'
+    )
+
     @property
     def password(self):
         return self.hashed_password
@@ -56,6 +79,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'songs': [song.to_dict() for song in self.songs],
+            'likedSongs': [song.to_dict() for song in self.liked_songs],
             'playlists': [{'title': playlist.title, 'id': playlist.id} for playlist in self.playlists]
         }
 
@@ -80,6 +104,12 @@ class Song(db.Model, UserMixin):
         back_populates='songs'
     )
 
+    user_likes = db.relationship(
+        "User",
+        secondary=user_song_likes,
+        back_populates='liked_songs'
+    )
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -87,6 +117,7 @@ class Song(db.Model, UserMixin):
             'file_name': self.file_name,
             'description': self.description,
             'user': self.user.username,
+            'userLikes': [user.id for user in self.user_likes]
         }
 
 class Playlist(db.Model, UserMixin):

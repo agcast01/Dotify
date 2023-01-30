@@ -248,7 +248,7 @@ button {
     width: 240px;
     padding: 4px;
     font-size: 14px;
-    z-index: 2;
+    z-index: 1000;
 }
 
 #drop-down>* {
@@ -264,6 +264,8 @@ button {
     padding: 0 20px 20px 20px;
     display: flex;
     position: relative;
+    z-index: 1;
+    width: fit-content;
 }
 
 .playlist-image {
@@ -549,4 +551,12 @@ button {
 .edit-error {
     text-align: center;
     padding-bottom: 24px;
+}
+
+.description {
+    color: #b3b3b3;
+}
+
+.playlist-stats {
+    margin-top: 8px;
 }

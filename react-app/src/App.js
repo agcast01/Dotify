@@ -14,11 +14,14 @@ import SingleSong from './components/Songs/SingleSong';
 import * as songReducer from './store/song'
 import * as playListReducer from './store/playlist'
 import Playlist from './components/Playlists/Playlist';
+import AudioPlayer from './components/Songs/AudioPlayer';
+import { SongContext } from './components/Providers/SongContext';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const {setTheme} = useContext(ThemeContext)
+  const {currentSong} = useContext(SongContext)
   const [path, setPath] = useState(window.location.pathname)
   useEffect(() => {
     (async () => {
@@ -71,6 +74,7 @@ function App() {
         </div>
         </Route>
       </Switch>
+      {currentSong && <AudioPlayer />}
     </BrowserRouter>
 
   );

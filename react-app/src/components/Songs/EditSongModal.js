@@ -8,10 +8,11 @@ function EditSongModal({ song, setShowEditModal }) {
     const user = useSelector(state => state.session.user)
 
     const [title, setTitle] = useState(song.title)
+    const [description, setDescription] = useState()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await dispatch(songReducer.update({ title, userId: user.id }, song.id))
+        await dispatch(songReducer.update({ title, userId: user.id, description }, song.id))
         setShowEditModal(false)
     }
 
@@ -34,6 +35,8 @@ function EditSongModal({ song, setShowEditModal }) {
                     <textarea
                         id="edit-description"
                         placeholder="Add an optional description"
+                        value={description}
+                        onChange={e => setDescription(e.target.value)}
                     />
                     <button type="submit" id="edit-save">Save</button>
                     <div id="edit-disclaimer">By proceeding, you agree to give Dotify access to the image you choose to upload. Please make sure you have the right to upload the image.</div>

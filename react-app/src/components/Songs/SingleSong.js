@@ -1,13 +1,15 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import DeleteSong from "./DeleteSongModal"
 import EditSongModal from "./EditSongModal"
 import './songs.css'
 import * as playlistReducer from '../../store/playlist'
+import { SongContext } from "../Providers/SongContext"
 
 function SingleSong({ setPath }) {
     const dispatch = useDispatch()
+    const { setCurrentSong } = useContext(SongContext)
     setPath('/users/:songId')
     const { songId } = useParams()
     const songs = useSelector(state => state.songs)
@@ -21,7 +23,7 @@ function SingleSong({ setPath }) {
 
 
     const title = () => {
-        if ( user !== null && user.username === song.user) {
+        if (user !== null && user.username === song.user) {
             return (
                 <>
                     <h1 onClick={() => setShowEditModal(true)} id='editable-title'>{song.title}</h1>
@@ -43,30 +45,35 @@ function SingleSong({ setPath }) {
                     <div className="playlist-data">
                         <p>Song</p>
                         {title() || <h1 >{song.title}</h1>}
-                        <p>{song.user}</p>
+                        {song.description && <p className="description">{song.description}</p>}
+                        <p className="playlist-stats">{song.user}</p>
                     </div>
 
                 </div>
             </div>
-
-            {showModal && <DeleteSong song={song} setShowModal={setShowModal} />}
-            { song.user === user.username && <div className="drop-div">
-                <button className="more-options" onClick={() => setOptions(!options)}>...</button>
-                {options && (
-                    <div id="options">
-                        <button onClick={() => setShowEditModal(true)}>Edit Details</button>
-                        <button onClick={() => setShowPlaylists(!showPlaylists)}>Add to Playlist</button>
-                        <button onClick={() => setShowModal(true)}>Delete</button>
-                        {showPlaylists && (
-                            <div id="playlist-list">
-                                {user.playlists.map(playlist => (
-                                    <button onClick={() => addToPlaylist(playlist.id)}>{playlist.title}</button>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                )}
-            </div>}
+            <div className="buttons">
+                <button className="play-button" onClick={() => setCurrentSong(song)}><span class="material-symbols-outlined">
+                    play_arrow
+                </span></button>
+                {showModal && <DeleteSong song={song} setShowModal={setShowModal} />}
+                {song.user === user.username && <div className="drop-div">
+                    <button className="more-options" onClick={() => setOptions(!options)}>...</button>
+                    {options && (
+                        <div id="options">
+                            <button onClick={() => setShowEditModal(true)}>Edit Details</button>
+                            <button onClick={() => setShowPlaylists(!showPlaylists)}>Add to Playlist</button>
+                            <button onClick={() => setShowModal(true)}>Delete</button>
+                            {showPlaylists && (
+                                <div id="playlist-list">
+                                    {user.playlists.map(playlist => (
+                                        <button onClick={() => addToPlaylist(playlist.id)}>{playlist.title}</button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>}
+            </div>
 
 
         </div>

@@ -18,3 +18,56 @@
    background-color: #3e3e3e;
    box-sizing: border-box;
 }
+
+#audio-player {
+    width: 100vw;
+    height: 90px;
+    position: fixed;
+    bottom: 0;
+    background-color: #181818;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 16px;
+}
+
+.play-button {
+    color: white;
+    background-color: #1ED760;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+}
+
+.buttons {
+    display: flex;
+}
+
+#current-song-details {
+    display: flex;
+    padding-left: 16px;
+}
+
+#current-song-details image{
+    height: 56px;
+    width: 56px;
+}
+
+#control-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+#control-buttons #controls-play {
+    color: black;
+    background-color: white;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    padding: 0;
+}
+
+#volume-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

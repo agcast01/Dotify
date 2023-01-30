@@ -11,6 +11,7 @@ function UploadSongForm() {
 
     const [title, setTitle] = useState('')
     const [fileError, setFileError] = useState('')
+    const [description, setDescription] = useState('')
     const [song, setSong] = useState('')
 
     const handleSubmit = async(e) => {
@@ -20,6 +21,7 @@ function UploadSongForm() {
         formData.append('song', song)
         formData.append("title", title);
         formData.append("userId", user.id)
+        formData.append('description', description)
         
         if(!song.name.endsWith('.mp3') && !song.name.endsWith('.wav')) {
             return setFileError('You must upload either an mp3 or wav file')
@@ -51,6 +53,8 @@ function UploadSongForm() {
                     <label>Enter the description of your song</label>
                     <textarea 
                         placeholder='Optional: Enter your description here.'
+                        value={description}
+                        onChange={e => setDescription(e.target.value)}
                     />
                 </div>
                 <div>

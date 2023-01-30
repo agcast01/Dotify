@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useSelector } from "react-redux"
 import { NavLink, useHistory } from "react-router-dom"
 import LogoutButton from "./auth/LogoutButton";
-import PlaylistTop from "./Playlists/PlaylistTop";
+
 import { ThemeContext } from "./Providers/ThemeProvider";
 import UserTop from './User/UserTop'
 

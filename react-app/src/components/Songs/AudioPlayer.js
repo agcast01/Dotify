@@ -11,6 +11,7 @@ function AudioPlayer() {
     const [isMuted, setIsMuted] = useState(false)
 
     useEffect(() => {
+        if(wavesurfer) wavesurfer.destroy()
         if (waveRef.current) {
             let wavesurfer = WaveSurfer.create({
                 container: waveRef.current,

@@ -120,10 +120,6 @@ class Song(db.Model, UserMixin):
             'description': self.description,
             'user': self.user.username,
             'userLikes': [user.id for user in self.user_likes],
-            'album': {
-                'title': self.album.title,
-                'imageUrl': self.album.imageUrl
-            }
         }
 
 class Playlist(db.Model, UserMixin):

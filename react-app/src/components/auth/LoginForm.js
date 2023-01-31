@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
+import { SongContext } from '../Providers/SongContext';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -10,6 +11,8 @@ const LoginForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory()
+  const {setCurrentSong} = useContext(SongContext)
+  setCurrentSong('')
 
   const onLogin = async (e) => {
     e.preventDefault();

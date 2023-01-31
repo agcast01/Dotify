@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import { SongContext } from '../Providers/SongContext';
 import './auth.css'
 
 const SignUpForm = () => {
+  const {setCurrentSong} = useContext(SongContext)
+  setCurrentSong('')
+
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');

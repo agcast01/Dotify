@@ -9,9 +9,16 @@ function EditSongModal({ song, setShowEditModal }) {
 
     const [title, setTitle] = useState(song.title)
     const [description, setDescription] = useState()
+    const [validationErrors, setValidationErrors] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        let currErrors = []
+
+        if(!title.length || !title.replace(/\s/g, '').length) currErrors.push('Must have a title.')
+        if(title.length > 30) currErrors.push('Title must be less than 30 characters')
+        setValidationErrors(currErrors)
+        if (currErrors.length) return null
         await dispatch(songReducer.update({ title, userId: user.id, description }, song.id))
         setShowEditModal(false)
     }
@@ -24,6 +31,11 @@ function EditSongModal({ song, setShowEditModal }) {
                     <h3>Edit Details</h3>
                     <button className="cancel-button" onClick={() => setShowEditModal(false)}>x</button>
                 </div>
+                <ul className="edit-error">
+                    {validationErrors.map(error => (
+                        <li key={error} className='error'>{error}</li>
+                    ))}
+                </ul>
                 <form className="edit-form" onSubmit={handleSubmit}>
                     <div id="edit-image"></div>
                     <input

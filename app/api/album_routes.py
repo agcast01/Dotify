@@ -88,6 +88,25 @@ def update_album(id):
 
     return validation_errors_to_error_messages(form.errors), 401
 
+@album_routes.route('/<int:id>', methods=['POST'])
+@login_required
+def addSong(id):
+    album = Album.query.get(id)
+    
+    form = SongPlaylistForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    
+    if form.validate_on_submit():
+        song = Song.query.get(form.data['songId'])
+        
+        album.songs.append(song)
+
+        db.session.commit()
+
+        return album.to_dict(), 201
+
+    return validation_errors_to_error_messages(form.errors), 401
+
 @album_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_album(id):

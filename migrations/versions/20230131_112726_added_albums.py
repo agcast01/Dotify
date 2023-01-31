@@ -28,7 +28,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
 
-    op.add_column('songs', sa.Column('albumId', sa.Integer(), nullable=False))
+    op.add_column('songs', sa.Column('albumId', sa.Integer(), nullable=True))
     op.create_foreign_key(None, 'songs', 'albums', ['albumId'], ['id'])
     # ### end Alembic commands ###
 

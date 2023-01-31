@@ -79,7 +79,7 @@ function SingleSong({ setPath }) {
                     favorite
                 </span></button>}
                 {showModal && <DeleteSong song={song} setShowModal={setShowModal} />}
-                {song.user === user.username && <div className="drop-div">
+                {user !== null && song.user === user.username && <div className="drop-div">
                     <button className="more-options" onClick={() => setOptions(!options)}>...</button>
                     {options && (
                         <div id="options">

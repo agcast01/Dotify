@@ -35,7 +35,7 @@ function PlaylistTop({playlistId}) {
             </span>
         </div>
         {showModal && <DeletePlaylistModal song={playlist} setShowModal={setShowModal} />}
-            { playlist.user === user.username && <div className="drop-div">
+            { user !== null && playlist.user === user.username && <div className="drop-div">
                 <button className="more-options" onClick={() => setOptions(!options)}>...</button>
                 {options && (
                     <div id="options">

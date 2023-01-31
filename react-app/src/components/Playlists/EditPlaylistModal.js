@@ -24,12 +24,11 @@ function EditPlaylistModal({ song: playlist, setShowEditModal }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         let currErrors = []
-        console.log(image)
+
         if(image && checkExt(image.name)) currErrors.push('The file must be a png, jpg, or jpeg file.')
-        if(!title.length) currErrors.push('Must have a title.')
+        if(!title.length || !title.replace(/\s/g, '').length) currErrors.push('Must have a title.')
         if(title.length > 30) currErrors.push('Title must be less than 30 characters')
         setValidationErrors(currErrors)
-        console.log(currErrors)
         if (currErrors.length) return null
 
         const formData = new FormData()

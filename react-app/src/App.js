@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -22,7 +22,6 @@ import Home from './components/Home';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const {setTheme} = useContext(ThemeContext)
   const {currentSong} = useContext(SongContext)
   const [path, setPath] = useState(window.location.pathname)
   useEffect(() => {
@@ -30,6 +29,7 @@ function App() {
       await dispatch(authenticate());
       await dispatch(songReducer.load())
       await dispatch(playListReducer.load())
+      
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -57,7 +57,7 @@ function App() {
           <div className='main-content'>
             <Switch>
               <Route exact path={'/'}>
-                {setTheme('')}
+                <Home setPath={setPath}/>
               </Route>
               <Route path={'/library'}>
                 <Library setPath={setPath}/>
@@ -73,9 +73,6 @@ function App() {
               </Route>
               <Route path={'/playlists/:playlistId'}>
                 <Playlist setPath={setPath}/>
-              </Route>
-              <Route exact path={'/home'}>
-                <Home setPath={setPath}/>
               </Route>
             </Switch>
           </div>

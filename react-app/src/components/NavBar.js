@@ -13,7 +13,7 @@ const NavBar = ({path, setPath}) => {
       <ul className='sidebar-links'>
         <li>
 
-          <button onClick={() => { history.push('/'); setPath('/') }} className={path === '/' ? 'sidebar-link active' : 'sidebar-link'}>
+          <button onClick={() => { history.push('/home'); setPath('/') }} className={path === '/' ? 'sidebar-link active' : 'sidebar-link'}>
             <span className="material-symbols-outlined home">
               home
             </span>

@@ -54,6 +54,7 @@ class User(db.Model, UserMixin):
     gender = Column(String)
 
     songs = db.relationship('Song', back_populates='user')
+    albums = db.relationship('Album', back_populates='user')
     playlists = db.relationship('Playlist', back_populates='user')
 
     liked_songs = db.relationship(
@@ -96,8 +97,9 @@ class Song(db.Model, UserMixin):
     file_name = Column(String, nullable=False)
     description = Column(String)
     playlistId = Column(Integer, ForeignKey(add_prefix_for_prod('playlists.id')))
-
+    albumId = Column(Integer, ForeignKey(add_prefix_for_prod('albums.id')), nullable=False)
     user = db.relationship('User', back_populates='songs')
+    album = db.relationship('Album', back_populates='songs')
     playlists = db.relationship(
         "Playlist",
         secondary=song_playlist,
@@ -117,7 +119,11 @@ class Song(db.Model, UserMixin):
             'file_name': self.file_name,
             'description': self.description,
             'user': self.user.username,
-            'userLikes': [user.id for user in self.user_likes]
+            'userLikes': [user.id for user in self.user_likes],
+            'album': {
+                'title': self.album.title,
+                'imageUrl': self.album.imageUrl
+            }
         }
 
 class Playlist(db.Model, UserMixin):
@@ -131,6 +137,7 @@ class Playlist(db.Model, UserMixin):
     description = Column(String)
     userId = Column(Integer, ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     imageUrl = Column(String)
+    
 
     user = db.relationship('User', back_populates='playlists')
     songs = db.relationship(
@@ -138,6 +145,31 @@ class Playlist(db.Model, UserMixin):
         secondary=song_playlist,
         back_populates='playlists'
     )
+
+    def to_dict(self):
+        return {
+            "id" : self.id,
+            'title': self.title,
+            'description': self.description,
+            'user': self.user.username,
+            'songs': [song.to_dict() for song in self.songs],
+            'imageUrl': self.imageUrl
+        }
+
+class Album(db.Model, UserMixin):
+    __tablename__ = 'albums'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False)
+    description = Column(String)
+    userId = Column(Integer, ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    imageUrl = Column(String)
+
+    user = db.relationship('User', back_populates='albums')
+    songs = db.relationship('Song', back_populates='album')
 
     def to_dict(self):
         return {

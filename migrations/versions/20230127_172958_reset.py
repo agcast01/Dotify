@@ -75,4 +75,5 @@ def downgrade():
     op.drop_table('songs')
     op.drop_table('playlists')
     op.drop_table('users')
+    op.drop_table('albums')
     # ### end Alembic commands ###

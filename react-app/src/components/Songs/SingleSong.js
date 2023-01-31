@@ -73,7 +73,9 @@ function SingleSong({ setPath }) {
                 <button className="play-button" onClick={() => setCurrentSong(song)}><span class="material-symbols-outlined">
                     play_arrow
                 </span></button>
-                {user !== null && <button className={checkLiked(song.id)?"liked liked-main" : "not-liked not-liked-main"} onClick={likeSong}><span class="material-symbols-outlined">
+                {user !== null && <button className={checkLiked(song.id)?"liked liked-main" : "not-liked not-liked-main"} 
+                onClick={likeSong}
+                ><span class="material-symbols-outlined">
                     favorite
                 </span></button>}
                 {showModal && <DeleteSong song={song} setShowModal={setShowModal} />}

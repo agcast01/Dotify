@@ -17,6 +17,7 @@ import Playlist from './components/Playlists/Playlist';
 import AudioPlayer from './components/Songs/AudioPlayer';
 import { SongContext } from './components/Providers/SongContext';
 import LikedSongs from './components/User/LikedSongs';
+import Home from './components/Home';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -72,6 +73,9 @@ function App() {
               </Route>
               <Route path={'/playlists/:playlistId'}>
                 <Playlist setPath={setPath}/>
+              </Route>
+              <Route exact path={'/home'}>
+                <Home setPath={setPath}/>
               </Route>
             </Switch>
           </div>

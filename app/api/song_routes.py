@@ -16,6 +16,9 @@ s3 = boto3.resource('s3')
 
 bucket = 'dotify-bucket'
 
+def fixUrl(url):
+    return url.replace('http', 'https')
+
 def upload_file(file_name, bucket, object_name=None):
     if object_name is None:
         object_name = os.path.basename(file_name)
@@ -59,7 +62,7 @@ def upload_song():
         song = request.files['song']
         song.filename = get_unique_filename(song.filename)
         upload = upload_file_to_s3(song)
-        url = upload['url']
+        url = fixUrl(upload['url'])
         new_song.file_name = url
 
         db.session.add(new_song)

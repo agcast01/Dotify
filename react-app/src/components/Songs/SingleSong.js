@@ -61,7 +61,7 @@ function SingleSong({ setPath }) {
         <div onClick={e =>{ e.stopPropagation(); setOptions(false)}}>
             <div className="playlist-header">
                 <div className="playlist-info">
-                    <div className='album-pic'></div>
+                    <img className='album-pic' src={song.imageUrl} alt='Album'/>
                     <div className="playlist-data">
                         <p>Song</p>
                         {title() || <h1 >{song.title}</h1>}

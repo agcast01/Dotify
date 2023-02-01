@@ -49,11 +49,13 @@ def undo_seed():
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.songs RESTART IDENTITY CASCADE;")
         db.session.execute(f"TRUNCATE table {SCHEMA}.playlists RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.albums RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM user_song_likes")
         db.session.execute("DELETE FROM users")
         db.session.execute("DELETE FROM songs")
         db.session.execute("DELETE FROM playlists")
+        db.session.execute("DELETE FROM albums")
 
         
     db.session.commit()

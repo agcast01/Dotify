@@ -121,7 +121,9 @@ class Song(db.Model, UserMixin):
             'description': self.description,
             'user': self.user.username,
             'userLikes': [user.id for user in self.user_likes],
-
+            'albumTitle': self.album.title,
+            'imageUrl': self.album.imageUrl,
+            'albumId': self.albumId
         }
 
 class Playlist(db.Model, UserMixin):
@@ -168,7 +170,7 @@ class Album(db.Model, UserMixin):
     imageUrl = Column(String, default='https://dotify-bucket.s3.amazonaws.com/0b09dfcf883b4d4685536f11014a8b8d.png')
 
     user = db.relationship('User', back_populates='albums')
-    songs = db.relationship('Song', back_populates='album')
+    songs = db.relationship('Song', back_populates='album', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {

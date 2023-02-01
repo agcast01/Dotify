@@ -611,3 +611,11 @@ button {
 .no-image .material-symbols-outlined {
     font-size: 60px;
 }
+
+.disabled {
+    cursor: not-allowed;
+}
+
+.disabled button {
+    cursor: not-allowed;
+}

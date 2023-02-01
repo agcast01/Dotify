@@ -12,7 +12,7 @@ function LikedSongsButton() {
     }
 
     return (
-        <button className="sidebar-link" onClick={handleClick}>
+        <button className="sidebar-link" onClick={handleClick} style={user=== null ? {'cursor': 'not-allowed'}: {'cursor': 'pointer'}}> 
             <span className="material-symbols-outlined" id='liked-icon'>
                 favorite
             </span>

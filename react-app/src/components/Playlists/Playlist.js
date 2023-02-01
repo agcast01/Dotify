@@ -8,6 +8,7 @@ function Playlist({setPath}) {
     setPath(`/playlists/${playlistId}`)
     const playlists = useSelector(state => state.playlists)
     const playlist = playlists[playlistId]
+    if(!playlist) return null
     return (
         <div>
             <PlaylistTop playlistId={playlist.id} />

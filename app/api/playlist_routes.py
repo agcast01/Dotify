@@ -81,7 +81,7 @@ def update_playlist(id):
             upload = upload_file_to_s3(image)
             url = upload['url']
             new_playlist.imageUrl = url
-        print(new_playlist)
+
         db.session.commit()
 
         return new_playlist.to_dict(), 201
@@ -113,3 +113,4 @@ def delete_playlist(id):
     playlist = Playlist.query.get(id)
     db.session.delete(playlist)
     db.session.commit()
+    return 'success'

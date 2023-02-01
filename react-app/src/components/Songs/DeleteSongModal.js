@@ -1,13 +1,19 @@
+import { useContext } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { authenticate } from '../../store/session'
 import * as songReducer from '../../store/song'
+import { SongContext } from '../Providers/SongContext'
 
 function DeleteSong({song, setShowModal}) {
+    const {currentSong, setCurrentSong} = useContext(SongContext)
     const dispatch = useDispatch()
     const history= useHistory()
     const deleteSong = async (id) => {
         await dispatch(songReducer.remove(id))
+        await dispatch(authenticate())
         history.push('/user/songs')
+        if(currentSong === song) setCurrentSong('')
     }
     return (
         <div className="modal-background">

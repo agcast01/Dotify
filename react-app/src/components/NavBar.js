@@ -1,11 +1,12 @@
 
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 
 const NavBar = ({path, setPath}) => {
   const history = useHistory()
-
+  const user = useSelector(state => state.session.user)
   
 
   return (
@@ -40,7 +41,7 @@ const NavBar = ({path, setPath}) => {
           </button>
         </li> */}
         <li>
-          <button onClick={() => { history.push('/user/songs'); setPath('/user/songs') }} className={path === '/user/songs' ? 'sidebar-link active' : 'sidebar-link'}>
+          <button onClick={() => { history.push('/user/songs'); setPath('/user/songs') }} className={path === '/user/songs' ? 'sidebar-link active' : 'sidebar-link'} style={user=== null ? {'cursor': 'not-allowed'}: {'cursor': 'pointer'}}>
             <span className="material-symbols-outlined">
               album
             </span>

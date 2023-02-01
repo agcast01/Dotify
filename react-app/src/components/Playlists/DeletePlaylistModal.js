@@ -9,7 +9,7 @@ function DeletePlaylistModal({song: playlist, setShowModal}) {
     const deleteSong = async (id) => {
         await dispatch(playlistReducer.remove(id))
         await dispatch(authenticate())
-        history.push('/library')
+        history.push('/')
     }
     return (
         <div className="modal-background">

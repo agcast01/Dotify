@@ -81,7 +81,8 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'songs': [song.to_dict() for song in self.songs],
             'likedSongs': [song.to_dict() for song in self.liked_songs],
-            'playlists': [{'title': playlist.title, 'id': playlist.id} for playlist in self.playlists]
+            'playlists': [{'title': playlist.title, 'id': playlist.id} for playlist in self.playlists],
+            'albums': [{'title': album.title, 'id': album.id} for album in self.albums]
         }
 
 
@@ -120,6 +121,7 @@ class Song(db.Model, UserMixin):
             'description': self.description,
             'user': self.user.username,
             'userLikes': [user.id for user in self.user_likes],
+
         }
 
 class Playlist(db.Model, UserMixin):
@@ -150,6 +152,7 @@ class Playlist(db.Model, UserMixin):
             'user': self.user.username,
             'songs': [song.to_dict() for song in self.songs],
             'imageUrl': self.imageUrl
+            
         }
 
 class Album(db.Model, UserMixin):

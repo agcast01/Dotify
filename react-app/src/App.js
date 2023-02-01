@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -9,15 +9,16 @@ import ContentTopBar from './components/ContentTopBar';
 import UploadSongForm from './components/Songs/UploadSongForm';
 import Library from './components/User/Library';
 import UserSongs from './components/User/UserSongs';
-import { ThemeContext } from './components/Providers/ThemeProvider';
 import SingleSong from './components/Songs/SingleSong';
 import * as songReducer from './store/song'
 import * as playListReducer from './store/playlist'
+import * as albumReducer from './store/album'
 import Playlist from './components/Playlists/Playlist';
 import AudioPlayer from './components/Songs/AudioPlayer';
 import { SongContext } from './components/Providers/SongContext';
 import LikedSongs from './components/User/LikedSongs';
 import Home from './components/Home';
+import CreateAlbumForm from './components/Albums/CreateAlbumForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -29,6 +30,7 @@ function App() {
       await dispatch(authenticate());
       await dispatch(songReducer.load())
       await dispatch(playListReducer.load())
+      await dispatch(albumReducer.load())
       
       setLoaded(true);
     })();
@@ -49,6 +51,9 @@ function App() {
         </Route>
         <Route path={'/new-song'}>
           <UploadSongForm />
+        </Route>
+        <Route path={'/new-album'}>
+          <CreateAlbumForm />
         </Route>
         <Route path={'/'}>
         <SideBar path={path} setPath={setPath}/>

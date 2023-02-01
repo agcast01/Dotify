@@ -82,7 +82,7 @@ class User(db.Model, UserMixin):
             'songs': [song.to_dict() for song in self.songs],
             'likedSongs': [song.to_dict() for song in self.liked_songs],
             'playlists': [{'title': playlist.title, 'id': playlist.id} for playlist in self.playlists],
-            'albums': [{'title': album.title, 'id': album.id} for album in self.albums]
+            'albums': [{'title': album.title, 'id': album.id, 'imageUrl': album.imageUrl} for album in self.albums]
         }
 
 
@@ -134,7 +134,7 @@ class Playlist(db.Model, UserMixin):
     title = Column(String, nullable=False)
     description = Column(String)
     userId = Column(Integer, ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    imageUrl = Column(String)
+    imageUrl = Column(String, default='https://dotify-bucket.s3.amazonaws.com/0b09dfcf883b4d4685536f11014a8b8d.png')
     
 
     user = db.relationship('User', back_populates='playlists')
@@ -165,7 +165,7 @@ class Album(db.Model, UserMixin):
     title = Column(String, nullable=False)
     description = Column(String)
     userId = Column(Integer, ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    imageUrl = Column(String)
+    imageUrl = Column(String, default='https://dotify-bucket.s3.amazonaws.com/0b09dfcf883b4d4685536f11014a8b8d.png')
 
     user = db.relationship('User', back_populates='albums')
     songs = db.relationship('Song', back_populates='album')

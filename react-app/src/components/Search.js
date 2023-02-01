@@ -22,7 +22,7 @@ function Search() {
     }, [query, albums, songs, playlists])
 
     return (
-        <div>
+        <div className="search-page">
             <div id='search-bar'>
                 <span class="material-symbols-outlined" id="search-icon">search</span>
                 <input type='search' id='search' onChange={e => setQuery(e.target.value)} placeholder="What do you want to listen to?"/>
@@ -33,8 +33,8 @@ function Search() {
                     {Boolean(filteredAlbums.length) && (
                         <div>
                             <h3>Albums</h3>
-                            <div>{filteredAlbums.map(album => (
-                                <div className="home-card" onClick={() => history.push(`/albums/${album}`)}>
+                            <div className="card-container">{filteredAlbums.map(album => (
+                                <div className="home-card" onClick={() => history.push(`/albums/${album.id}`)}>
                                 <img src={album.imageUrl} alt='Album' className='card-image' />
                                 <p className="title">{album.title}</p>
                                 <p>{album.user}</p>
@@ -45,8 +45,8 @@ function Search() {
                     {Boolean(filteredSongs.length) && (
                         <div>
                             <h3>Songs</h3>
-                            <div>{filteredSongs.map(song => (
-                                <div className="home-card" onClick={() => history.push(`/songs/${song}`)}>
+                            <div className="card-container">{filteredSongs.map(song => (
+                                <div className="home-card" onClick={() => history.push(`/songs/${song.id}`)}>
                                 <img src={song.imageUrl} alt='Album' className='card-image' />
                                 <p className="title">{song.title}</p>
                                 <p>{song.user}</p>
@@ -57,8 +57,8 @@ function Search() {
                     {Boolean(filteredPlaylists.length) && (
                         <div>
                             <h3>Playlists</h3>
-                            <div>{filteredPlaylists.map(playlist => (
-                                <div className="home-card" onClick={() => history.push(`/playlists/${playlist}`)}>
+                            <div className="card-container">{filteredPlaylists.map(playlist => (
+                                <div className="home-card" onClick={() => history.push(`/playlists/${playlist.id}`)}>
                                 <img src={playlist.imageUrl} alt='Playlist' className='card-image' />
                                 <p className="title">{playlist.title}</p>
                                 <p>{playlist.user}</p>

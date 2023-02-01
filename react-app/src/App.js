@@ -25,7 +25,7 @@ import Search from './components/Search';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const {currentSong} = useContext(SongContext)
+  const { currentSong } = useContext(SongContext)
   const [path, setPath] = useState(window.location.pathname)
   useEffect(() => {
     (async () => {
@@ -33,7 +33,7 @@ function App() {
       await dispatch(songReducer.load())
       await dispatch(playListReducer.load())
       await dispatch(albumReducer.load())
-      
+
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -46,7 +46,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path={'/signup'}>
-          <SignUpForm/>
+          <SignUpForm />
         </Route>
         <Route path={'/login'}>
           <LoginForm />
@@ -58,38 +58,40 @@ function App() {
           <CreateAlbumForm />
         </Route>
         <Route path={'/'}>
-        <SideBar path={path} setPath={setPath}/>
-        <div className='content'>
-          <ContentTopBar path={path}/>
-          <div className='main-content'>
-            <Switch>
-              <Route exact path={'/'}>
-                <Home setPath={setPath}/>
-              </Route>
-              <Route path={'/search'}>
-                <Search />
-              </Route>
-              <Route path={'/your-albums'}>
-                <YourAlbums setPath={setPath}/>
-              </Route>
-              <Route path={'/liked-songs'}>
-                <LikedSongs setPath={setPath}/>
-              </Route>
-              <Route path={'/user/songs'}>
-                <UserSongs setPath={setPath}/>
-              </Route>
-              <Route path={'/songs/:songId'}>
-                <SingleSong setPath={setPath}/>
-              </Route>
-              <Route path={'/playlists/:playlistId'}>
-                <Playlist setPath={setPath}/>
-              </Route>
-              <Route path={'/albums/:albumId'}>
-                <Album setPath={setPath} />
-              </Route>
-            </Switch>
+          <div id='main' style={{'height': currentSong ? 'calc(100% - 90px)': '100%'}}>
+            <SideBar path={path} setPath={setPath} />
+            <div className='content'>
+              <ContentTopBar path={path} />
+              <div className='main-content'>
+                <Switch>
+                  <Route exact path={'/'}>
+                    <Home setPath={setPath} />
+                  </Route>
+                  <Route path={'/search'}>
+                    <Search />
+                  </Route>
+                  <Route path={'/your-albums'}>
+                    <YourAlbums setPath={setPath} />
+                  </Route>
+                  <Route path={'/liked-songs'}>
+                    <LikedSongs setPath={setPath} />
+                  </Route>
+                  <Route path={'/user/songs'}>
+                    <UserSongs setPath={setPath} />
+                  </Route>
+                  <Route path={'/songs/:songId'}>
+                    <SingleSong setPath={setPath} />
+                  </Route>
+                  <Route path={'/playlists/:playlistId'}>
+                    <Playlist setPath={setPath} />
+                  </Route>
+                  <Route path={'/albums/:albumId'}>
+                    <Album setPath={setPath} />
+                  </Route>
+                </Switch>
+              </div>
+            </div>
           </div>
-        </div>
         </Route>
       </Switch>
       {currentSong && <AudioPlayer />}

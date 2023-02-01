@@ -7,7 +7,7 @@ function AudioPlayer() {
     const { currentSong } = useContext(SongContext)
 
     const [wavesurfer, setWavesurfer] = useState('')
-    const [isPlaying, setIsPlaying] = useState(false)
+    const [isPlaying, setIsPlaying] = useState(true)
     const [isMuted, setIsMuted] = useState(false)
 
     useEffect(() => {
@@ -17,7 +17,8 @@ function AudioPlayer() {
                 container: waveRef.current,
                 autoCenter: true,
                 fillParent: true,
-                height: 32
+                height: 20,
+                responsive: true
             })
             setWavesurfer(wavesurfer)
             wavesurfer.load(currentSong.file_name)

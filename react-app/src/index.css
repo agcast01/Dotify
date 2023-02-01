@@ -30,6 +30,7 @@ a {
     padding-top: 24px;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 
@@ -629,4 +630,39 @@ button {
     background-position: center;
     background-size: contain;
     margin-right: 20px;
+}
+
+#search {
+    width: 364px;
+    height: 40px;
+    padding: 6px 48px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    position: absolute;
+    left: 0;
+}
+
+#search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#search-icon {
+    position: relative;
+    color: black;
+    z-index: 1;
+    left: 15px;
+}
+
+.about-me {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 20px;
 }

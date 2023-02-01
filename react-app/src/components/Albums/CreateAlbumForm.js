@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Redirect, useHistory } from "react-router-dom"
 import { SongContext } from "../Providers/SongContext"
@@ -24,13 +24,18 @@ function CreateAlbumForm(){
         return true
     }
 
+    useEffect(() => {
+        setValidationErrors([])
+    }, [title])
+
     async function onSubmit(e) {
         e.preventDefault()
         const errors = []
         if(image && checkExt(image.name)) errors.push('The file must be a png, jpg, or jpeg file.')
         if(!title || !title.replace(/\s/g, '').length) errors.push("Title is required")
         if(title.length > 30) errors.push('Title must be less than 30 characters')
-        if (errors.length) return setValidationErrors(errors)
+        setValidationErrors(errors)
+        if (errors.length) return 
         
         const formData = new FormData()
         formData.append('title', title)
@@ -49,7 +54,7 @@ function CreateAlbumForm(){
             <h3>Upload your new album here</h3>
             <ul>
                 {validationErrors.map(error => (
-                    <li className="error">error</li>
+                    <li className="error">{error}</li>
                 ))}
             </ul>
             <div>

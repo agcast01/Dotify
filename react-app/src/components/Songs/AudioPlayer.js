@@ -49,7 +49,7 @@ function AudioPlayer() {
     return (
         <div id='audio-player'>
             <div id='current-song-details'>
-                <image></image>
+                <div className='currentSong-image' style={{'background-image': `url(${currentSong.imageUrl})`}}></div>
                 <div>
                     <p className='title'>{currentSong.title}</p>
                     <p>{currentSong.user}</p>

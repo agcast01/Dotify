@@ -45,6 +45,7 @@
 #current-song-details {
     display: flex;
     padding-left: 16px;
+    align-items: center;
 }
 
 #current-song-details image{

@@ -622,3 +622,11 @@ button {
 .disabled button {
     cursor: not-allowed;
 }
+
+.currentSong-image {
+    height: 56px;
+    width: 56px;
+    background-position: center;
+    background-size: contain;
+    margin-right: 20px;
+}

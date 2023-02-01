@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Redirect, useHistory } from "react-router-dom"
 import { authenticate } from "../../store/session"
 import * as songReducer from '../../store/song'
+import * as albumReducer from '../../store/album'
 import { SongContext } from "../Providers/SongContext"
 
 function UploadSongForm() {
@@ -16,6 +17,7 @@ function UploadSongForm() {
     const [description, setDescription] = useState('')
     const [song, setSong] = useState('')
     const [errors, setErrors] = useState([])
+    const [albumId, setAlbumId] = useState('new')
 
     useEffect(()=>{
         setErrors([])
@@ -24,12 +26,21 @@ function UploadSongForm() {
     const handleSubmit = async(e) => {
         e.preventDefault();
         let error = [];
+        let newAlbumId
+        if(albumId === 'new') {
+            const albumForm = new FormData()
+            albumForm.append('title', title)
+            albumForm.append('userId', user.id)
+            const newAlbum = await dispatch(albumReducer.create(albumForm))
+            newAlbumId = newAlbum.id
+        }
 
         const formData = new FormData()
         formData.append("song", song)
         formData.append("title", title);
         formData.append("userId", user.id)
         formData.append('description', description)
+        formData.append('albumId', newAlbumId || albumId)
 
         if(!title || !title.replace(/\s/g, '').length) error.push("Title is required")
         if(!song) error.push('Song is required')
@@ -41,8 +52,9 @@ function UploadSongForm() {
         }
 
         await dispatch(songReducer.upload(formData))
+        await dispatch(albumReducer.load())
         await dispatch(authenticate())
-        return history.push('/user/songs')
+        return history.push(`/albums/${newAlbumId || albumId}`)
     }
 
     if(user === null) return <Redirect to={'/login'}/>
@@ -67,6 +79,16 @@ function UploadSongForm() {
                         value={description}
                         onChange={e => setDescription(e.target.value)}
                     />
+                </div>
+                <div>
+                    <label>Select the song's album</label>
+                    <select onChange={e => setAlbumId(e.target.value)}>
+                        <option value='new'>Create New Album</option>
+                        {user.albums.map(album => (
+                            <option value={album.id}>{album.title}</option>
+                        ))}
+                    </select>
+
                 </div>
                 <div>
                     <label>Upload your file</label>

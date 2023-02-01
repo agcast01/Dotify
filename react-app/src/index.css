@@ -275,6 +275,7 @@ button {
     background: linear-gradient(145deg, rgba(255, 0, 0, 1) 0%, rgba(255, 107, 107, 1) 100%);
     display: flex;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.391);
+    background-position: center;
 }
 
 .playlist-image .material-symbols-outlined {
@@ -579,11 +580,13 @@ button {
     background-color: #181818;
     border-radius: 10px;
     margin-right: 20px;
+    margin-bottom: 20px;
 }
 
 .home-card p{
     margin: 0;
     margin-top: 10px;
+    
     width: 185px;
 }
 

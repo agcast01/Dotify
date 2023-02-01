@@ -36,7 +36,7 @@ def upgrade():
     sa.Column('title', sa.String(), nullable=False),
     sa.Column('description', sa.String(), nullable=True),
     sa.Column('userId', sa.Integer(), nullable=False),
-    sa.Column('imageUrl', sa.String(), nullable=True),
+    sa.Column('imageUrl', sa.String(), nullable=True, server_default='https://dotify-bucket.s3.amazonaws.com/0b09dfcf883b4d4685536f11014a8b8d.png'),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

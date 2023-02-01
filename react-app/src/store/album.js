@@ -29,16 +29,14 @@ export const load = () => async (dispatch) => {
 export const create = (data) => async (dispatch) => {
     const response = await fetch('/api/albums/', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        body: data
     })
 
     if (response.ok) {
-        const data = await response.json();
-        await dispatch(createAlbum(data))
-        return data.id;
+        const final = await response.json();
+        await dispatch(createAlbum(final))
+        
+        return final;
     } else if (response.status < 500) {
         const data = await response.json();
         if(data.errors) {

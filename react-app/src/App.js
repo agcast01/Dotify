@@ -7,7 +7,6 @@ import { authenticate } from './store/session';
 import SideBar from './components/SideBar';
 import ContentTopBar from './components/ContentTopBar';
 import UploadSongForm from './components/Songs/UploadSongForm';
-import Library from './components/User/Library';
 import UserSongs from './components/User/UserSongs';
 import SingleSong from './components/Songs/SingleSong';
 import * as songReducer from './store/song'
@@ -19,6 +18,8 @@ import { SongContext } from './components/Providers/SongContext';
 import LikedSongs from './components/User/LikedSongs';
 import Home from './components/Home';
 import CreateAlbumForm from './components/Albums/CreateAlbumForm';
+import YourAlbums from './components/Albums/YourAlbums';
+import Album from './components/Albums/Album';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -64,8 +65,8 @@ function App() {
               <Route exact path={'/'}>
                 <Home setPath={setPath}/>
               </Route>
-              <Route path={'/library'}>
-                <Library setPath={setPath}/>
+              <Route path={'/your-albums'}>
+                <YourAlbums setPath={setPath}/>
               </Route>
               <Route path={'/liked-songs'}>
                 <LikedSongs setPath={setPath}/>
@@ -78,6 +79,9 @@ function App() {
               </Route>
               <Route path={'/playlists/:playlistId'}>
                 <Playlist setPath={setPath}/>
+              </Route>
+              <Route path={'/albums/:albumId'}>
+                <Album setPath={setPath} />
               </Route>
             </Switch>
           </div>

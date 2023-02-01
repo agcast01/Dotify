@@ -20,6 +20,7 @@ import Home from './components/Home';
 import CreateAlbumForm from './components/Albums/CreateAlbumForm';
 import YourAlbums from './components/Albums/YourAlbums';
 import Album from './components/Albums/Album';
+import Search from './components/Search';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -64,6 +65,9 @@ function App() {
             <Switch>
               <Route exact path={'/'}>
                 <Home setPath={setPath}/>
+              </Route>
+              <Route path={'/search'}>
+                <Search />
               </Route>
               <Route path={'/your-albums'}>
                 <YourAlbums setPath={setPath}/>

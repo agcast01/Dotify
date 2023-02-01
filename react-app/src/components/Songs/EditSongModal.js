@@ -36,7 +36,7 @@ function EditSongModal({ song, setShowEditModal }) {
                     ))}
                 </ul>
                 <form className="edit-form" onSubmit={handleSubmit}>
-                    <div id="edit-image"></div>
+                    <div id="edit-image" style={{'background-image': `url(${song.imageUrl})`}}></div>
                     <input
                         id="edit-name"
                         placeholder="Add a name"

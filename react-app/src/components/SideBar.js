@@ -9,6 +9,10 @@ function SideBar({path, setPath}){
             <NavBar path={path} setPath={setPath}/>
             <SongPlaylistNavBar />
             <PlaylistNavbar path={path}/>
+            <div className="about-me">
+                <p className="title">About Me</p>
+                <a href="https://github.com/agcast01">Github</a>
+            </div>
         </div>
     )
 }

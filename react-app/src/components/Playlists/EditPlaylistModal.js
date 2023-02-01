@@ -36,7 +36,6 @@ function EditPlaylistModal({ song: playlist, setShowEditModal }) {
         formData.append('description', description)
         formData.append('image', image)
         formData.append('userId', user.id)
-        console.log(image)
         await dispatch(playlistReducer.update(formData, playlist.id))
         setShowEditModal(false)
     }
@@ -55,7 +54,7 @@ function EditPlaylistModal({ song: playlist, setShowEditModal }) {
                 </ul>
                 <form className="edit-form" onSubmit={handleSubmit}>
                     <div id="edit-image" onClick={() => document.getElementById('selected-file').click()} style={{'backgroundImage': `url(${imageUrl})`, 'cursor': 'pointer'}}>
-                        <input id="selected-file" class="edit-image" type="file" onChange={e => {setImage(e.target.files[0]); setImageUrl(image.name)}} />
+                        <input id="selected-file" accept="image/*" class="edit-image" type="file" onChange={e => {setImage(e.target.files[0]); setImageUrl(image.name)}} />
                     </div>
                     <input
                         id="edit-name"

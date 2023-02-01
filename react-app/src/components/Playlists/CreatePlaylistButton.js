@@ -23,7 +23,7 @@ function CreatePlaylistButton() {
 
     return (
         <>
-            <button className="sidebar-link" onClick={handleClick}>
+            <button className={user === null ? 'sidebar-link disabled':"sidebar-link"} onClick={handleClick} style={user=== null ? {'cursor': 'not-allowed'}: {'cursor': 'pointer'}}>
                 <span className="material-symbols-outlined" id='create-icon'>
                     add
                 </span>

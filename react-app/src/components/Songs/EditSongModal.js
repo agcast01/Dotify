@@ -8,7 +8,7 @@ function EditSongModal({ song, setShowEditModal }) {
     const user = useSelector(state => state.session.user)
 
     const [title, setTitle] = useState(song.title)
-    const [description, setDescription] = useState()
+    const [description, setDescription] = useState(song.description)
     const [validationErrors, setValidationErrors] = useState([])
 
     const handleSubmit = async (e) => {
@@ -22,7 +22,6 @@ function EditSongModal({ song, setShowEditModal }) {
         await dispatch(songReducer.update({ title, userId: user.id, description }, song.id))
         setShowEditModal(false)
     }
-
 
     return (
         <div className="modal-background">

@@ -21,14 +21,18 @@ function AudioPlayer() {
             })
             setWavesurfer(wavesurfer)
             wavesurfer.load(currentSong.file_name)
-
         }
+        
     }, [currentSong])
 
     function play() {
         wavesurfer.playPause()
         setIsPlaying(!isPlaying)
     }
+
+    if(wavesurfer) wavesurfer.on('ready', function () {
+        wavesurfer.play()
+    })
 
     function checkPlay() {
         if (wavesurfer) {

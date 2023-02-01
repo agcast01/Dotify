@@ -95,6 +95,7 @@ def delete_song(id):
     song = Song.query.get(id)
     db.session.delete(song)
     db.session.commit()
+    return 'Success'
 
 @song_routes.route('/<int:id>/likes', methods=['POST'])
 @login_required

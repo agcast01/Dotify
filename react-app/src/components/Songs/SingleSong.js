@@ -55,8 +55,10 @@ function SingleSong({ setPath }) {
         await dispatch(dislike(song.id, user.id))
     }
 
+    if(!song) return null
+
     return (
-        <div>
+        <div onClick={e =>{ e.stopPropagation(); setOptions(false)}}>
             <div className="playlist-header">
                 <div className="playlist-info">
                     <div className='album-pic'></div>
@@ -80,12 +82,12 @@ function SingleSong({ setPath }) {
                 </span></button>}
                 {showModal && <DeleteSong song={song} setShowModal={setShowModal} />}
                 {user !== null && song.user === user.username && <div className="drop-div">
-                    <button className="more-options" onClick={() => setOptions(!options)}>...</button>
+                    <button className="more-options" onClick={(e) => {e.stopPropagation();setOptions(!options)}}>...</button>
                     {options && (
                         <div id="options">
-                            <button onClick={() => setShowEditModal(true)}>Edit Details</button>
-                            <button onClick={() => setShowPlaylists(!showPlaylists)}>Add to Playlist</button>
-                            <button onClick={() => setShowModal(true)}>Delete</button>
+                            <button onClick={(e) => {e.stopPropagation(); setShowEditModal(true)}}>Edit Details</button>
+                            <button onClick={(e) => {e.stopPropagation(); setShowPlaylists(!showPlaylists)}}>Add to Playlist</button>
+                            <button onClick={(e) => {e.stopPropagation(); setShowModal(true)}}>Delete</button>
                             {showPlaylists && (
                                 <div id="playlist-list">
                                     {user.playlists.map(playlist => (

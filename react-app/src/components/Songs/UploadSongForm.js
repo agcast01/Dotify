@@ -56,7 +56,6 @@ function UploadSongForm() {
                     <input 
                         placeholder="Enter your title here."
                         value={title}
-                        accept='audio/*'
                         onChange={e => setTitle(e.target.value)}
                     />
                     {errors.includes('Title is required') && <p className="error">Title is required</p>}
@@ -73,6 +72,7 @@ function UploadSongForm() {
                     <label>Upload your file</label>
                     <input 
                         type="file"
+                        accept='audio/*'
                         onChange={e => setSong(e.target.files[0])}
                     />
                     {errors.includes('Song is required') && <p className="error">Song is required</p>}

@@ -17,7 +17,8 @@ function AudioPlayer() {
                 container: waveRef.current,
                 autoCenter: true,
                 fillParent: true,
-                height: 20
+                height: 20,
+                responsive: true
             })
             setWavesurfer(wavesurfer)
             wavesurfer.load(currentSong.file_name)

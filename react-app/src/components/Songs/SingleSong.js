@@ -22,7 +22,6 @@ function SingleSong({ setPath }) {
     const [options, setOptions] = useState(false)
     const [showPlaylists, setShowPlaylists] = useState(false)
 
-
     const title = () => {
         if (user !== null && user.username === song.user) {
             return (

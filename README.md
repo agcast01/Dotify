@@ -44,3 +44,12 @@ The ability to listen to any song on the platform
 ![Screenshot (10)](https://user-images.githubusercontent.com/108693776/216475849-7a0efb28-b84b-403d-aa87-f753e16ef24a.png)
 
 The ability to create playlists and add songs that other people can see
+
+
+## Future Goals
+
+* Add in volume slider
+* Add user information
+* Add more social features like following users/playlists
+* Add queues for listening to songs
+* Add categories to better find songs you listen to

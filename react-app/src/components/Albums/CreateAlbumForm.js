@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Redirect, useHistory } from "react-router-dom"
 import { SongContext } from "../Providers/SongContext"
 import * as albumReducer from '../../store/album'
+import { authenticate } from "../../store/session"
 
 function CreateAlbumForm(){
     const {setCurrentSong} = useContext(SongContext)
@@ -43,6 +44,7 @@ function CreateAlbumForm(){
         formData.append('image', image)
         formData.append('userId', user.id)
         const newAlbum = await dispatch(albumReducer.create(formData))
+        await dispatch(authenticate())
         history.push(`/albums/${newAlbum.id}`)
     }
 

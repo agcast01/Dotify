@@ -30,7 +30,7 @@ function Songs({ songs }) {
                 <p>#</p>
                 <p>TITLE</p>
                 <p>ALBUM</p>
-                <p>DATE ADDED</p>
+                <p></p>
                 <span className="material-symbols-outlined empty" id="clock">
                     schedule
                 </span>
@@ -45,7 +45,7 @@ function Songs({ songs }) {
                         <div>
                             <Link to={`/albums/${song.albumId}`} className="title">{song.albumTitle}</Link>
                         </div>
-                        <p>Placeholder</p>
+                        <p></p>
                         <div>
                             {user !== null && <button className={checkLiked(song.id) ? "liked" : "not-liked"} onClick={() => likeSong(song.id)}><span className="material-symbols-outlined">
                             favorite

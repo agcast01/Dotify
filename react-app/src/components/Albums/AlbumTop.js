@@ -29,7 +29,7 @@ function AlbumTop({albumId}) {
             <span className='playlist-image' style={{'backgroundImage': `url(${album.imageUrl})`}}>
             </span>
             <span className="playlist-data">
-                <p>PLAYLIST</p>
+                <p>ALBUM</p>
                 {title() || <h1>{album.title}</h1>}
                 {album.description && <p className="description">{album.description}</p>}
                 <p className="playlist-stats">{album.user} • {album.songs.length} songs</p>

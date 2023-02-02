@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as albumReducer from '../../store/album'
+import * as songReducer from '../../store/song'
+import { authenticate } from "../../store/session"
 
 function EditAlbumModal({album, setShowEditModal}) {
     const dispatch = useDispatch()
@@ -36,6 +38,8 @@ function EditAlbumModal({album, setShowEditModal}) {
         formData.append('image', image)
         formData.append('userId', user.id)
         await dispatch(albumReducer.update(formData, album.id))
+        await dispatch(authenticate())
+        await dispatch(songReducer.load())
         setShowEditModal(false)
     }
 

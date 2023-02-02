@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { authenticate } from "../../store/session"
 import * as songReducer from '../../store/song'
 
 function EditSongModal({ song, setShowEditModal }) {
@@ -20,6 +21,7 @@ function EditSongModal({ song, setShowEditModal }) {
         setValidationErrors(currErrors)
         if (currErrors.length) return null
         await dispatch(songReducer.update({ title, userId: user.id, description }, song.id))
+        await dispatch(authenticate())
         setShowEditModal(false)
     }
 

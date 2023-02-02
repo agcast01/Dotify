@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as playlistReducer from '../../store/playlist'
 import { authenticate } from "../../store/session"
@@ -13,6 +13,13 @@ function EditPlaylistModal({ song: playlist, setShowEditModal }) {
     const [image, setImage] = useState('')
     const [imageUrl, setImageUrl] = useState(playlist.imageUrl || 'none')
     const [validationErrors, setValidationErrors] = useState([])
+    const [preview, setPreview] = useState('')
+
+    useEffect(() => {
+        if(image) {
+            setPreview(URL.createObjectURL(image))
+        } else setPreview('')
+    }, [image])
 
     function checkExt(name) {
         const allowed = ['png', 'jpg', 'jpeg']
@@ -55,7 +62,7 @@ function EditPlaylistModal({ song: playlist, setShowEditModal }) {
                     ))}
                 </ul>
                 <form className="edit-form" onSubmit={handleSubmit}>
-                    <div id="edit-image" onClick={() => document.getElementById('selected-file').click()} style={{'backgroundImage': `url(${imageUrl})`, 'cursor': 'pointer'}}>
+                    <div id="edit-image" onClick={() => document.getElementById('selected-file').click()} style={{'backgroundImage': `url(${preview || imageUrl})`, 'cursor': 'pointer'}}>
                         <input id="selected-file" accept="image/*" class="edit-image" type="file" onChange={e => {setImage(e.target.files[0]); setImageUrl(image.name)}} />
                     </div>
                     <input

@@ -11,7 +11,8 @@ function SideBar({path, setPath}){
             <PlaylistNavbar path={path}/>
             <div className="about-me">
                 <p className="title">About Me</p>
-                <a href="https://github.com/agcast01">Github</a>
+                <a href="https://github.com/agcast01" target='_blank' rel="noreferrer noopener">Github</a>
+                <a href="https://linkedin.com" target="_blank" rel="noreferrer noopener">LinkedIn</a>
             </div>
         </div>
     )

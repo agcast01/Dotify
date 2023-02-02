@@ -16,6 +16,7 @@ function CreateAlbumForm(){
     const [description, setDescription]= useState('')
     const [image, setImage] = useState('')
     const [validationErrors, setValidationErrors] =  useState([])
+    const [preview, setPreview] = useState('')
 
     function checkExt(name) {
         const allowed = ['png', 'jpg', 'jpeg']
@@ -28,6 +29,12 @@ function CreateAlbumForm(){
     useEffect(() => {
         setValidationErrors([])
     }, [title])
+
+    useEffect(() => {
+        if(image) {
+            setPreview(URL.createObjectURL(image))
+        }
+    }, [image])
 
     async function onSubmit(e) {
         e.preventDefault()
@@ -76,12 +83,14 @@ function CreateAlbumForm(){
                 />
             </div>
             <div>
-                <label>Upload your album's image here</label>
+                <label>Optional: Upload your album's image here</label>
+                {preview && <img id="blah" src={preview} alt="Preview" />}
                 <input 
                     type="file"
                     onChange={e => setImage(e.target.files[0])}
                     accept='image/*'
                 />
+                
             </div>
             <button type="submit" className="login-button" disabled={validationErrors.length}>Create your album</button>
             <button className="login-button" onClick={() => history.push('/')}>Cancel</button>

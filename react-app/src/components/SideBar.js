@@ -7,7 +7,7 @@ function SideBar({path, setPath}){
         <div className="sidebar">
             <div id='logo'>Dotify</div>
             <NavBar path={path} setPath={setPath}/>
-            <SongPlaylistNavBar />
+            <SongPlaylistNavBar path={path}/>
             <PlaylistNavbar path={path}/>
             <div className="about-me">
                 <p className="title">About Me</p>

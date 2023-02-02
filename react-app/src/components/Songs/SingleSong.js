@@ -83,16 +83,18 @@ function SingleSong({ setPath }) {
                 {user !== null && song.user === user.username && <div className="drop-div">
                     <button className="more-options" onClick={(e) => {e.stopPropagation();setOptions(!options)}}>...</button>
                     {options && (
-                        <div id="options">
-                            <button onClick={(e) => {e.stopPropagation(); setShowEditModal(true)}}>Edit Details</button>
-                            <button onClick={(e) => {e.stopPropagation(); setShowPlaylists(!showPlaylists)}}>Add to Playlist</button>
-                            <button onClick={(e) => {e.stopPropagation(); setShowModal(true)}}>Delete</button>
+                        <div id="options" onMouseLeave={() => setOptions(false)}>
+                            <span>
+                                <button onClick={(e) => {e.stopPropagation(); setShowEditModal(true)}}>Edit Details</button>
+                                <button onClick={(e) => {e.stopPropagation(); setShowPlaylists(!showPlaylists)}}>Add to Playlist</button>
+                                <button onClick={(e) => {e.stopPropagation(); setShowModal(true)}}>Delete</button>
+                            </span>
                             {showPlaylists && (
-                                <div id="playlist-list">
+                                <span id="playlist-list">
                                     {user.playlists.map(playlist => (
                                         <button onClick={() => addToPlaylist(playlist.id)}>{playlist.title}</button>
                                     ))}
-                                </div>
+                                </span>
                             )}
                         </div>
                     )}

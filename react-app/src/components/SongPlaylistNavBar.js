@@ -3,7 +3,7 @@ import YourAlbumsButton from "./Albums/YourAlbumsButton"
 import CreatePlaylistButton from "./Playlists/CreatePlaylistButton"
 import LikedSongsButton from "./User/LikedSongsButton"
 
-function SongPlaylistNavBar() {
+function SongPlaylistNavBar({path}) {
     const user = useSelector(state => state.session.user)
     return (
         <div className="song-navbar">
@@ -12,10 +12,10 @@ function SongPlaylistNavBar() {
                     <CreatePlaylistButton />
                 </li>
                 <li>
-                    <LikedSongsButton />
+                    <LikedSongsButton path={path}/>
                 </li>
                 <li>
-                    <YourAlbumsButton />
+                    <YourAlbumsButton path={path}/>
                 </li>
             </ul>
         </div>

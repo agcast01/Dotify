@@ -1,6 +1,7 @@
 import {  useSelector } from "react-redux"
 import { Redirect } from "react-router-dom"
 import Songs from "../Songs/Songs"
+import UserTop from "./UserTop"
 
 function UserSongs({setPath}) {
     setPath('/user/songs')
@@ -12,6 +13,7 @@ function UserSongs({setPath}) {
 
     return (
         <div>
+            <UserTop />
             <Songs songs={user.songs}/>
         </div>
     )

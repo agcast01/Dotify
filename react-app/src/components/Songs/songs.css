@@ -1,11 +1,10 @@
 #playlist-list {
-    position: absolute;
-    top: 0;
-    left: 105%;
-    display: flex;
-    flex-direction: column;
+    position: relative;
     background-color: #282828;
     color: white;
+    border-left: 1px solid white;
+    height: 105px;
+    overflow: auto;
 }
 
 #playlist-list > * {

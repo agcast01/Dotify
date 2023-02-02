@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 
-function YourAlbums() {
+function YourAlbums({setPath}) {
     const user = useSelector(state => state.session.user)
     const history = useHistory()
-
+    setPath('/your-albums')
     if (user === null) return <Redirect to={'/'} />
 
     return (

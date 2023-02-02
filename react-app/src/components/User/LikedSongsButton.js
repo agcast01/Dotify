@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 
-function LikedSongsButton() {
+function LikedSongsButton({path}) {
     const user = useSelector(state => state.session.user)
     const history = useHistory()
 
@@ -12,7 +12,7 @@ function LikedSongsButton() {
     }
 
     return (
-        <button className="sidebar-link" onClick={handleClick} style={user=== null ? {'cursor': 'not-allowed'}: {'cursor': 'pointer'}}> 
+        <button className={path === '/liked-songs' ? 'sidebar-link active' : 'sidebar-link'} onClick={handleClick} style={user=== null ? {'cursor': 'not-allowed'}: {'cursor': 'pointer'}}> 
             <span className="material-symbols-outlined" id='liked-icon'>
                 favorite
             </span>

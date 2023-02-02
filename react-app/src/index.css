@@ -529,9 +529,10 @@ button {
     position: absolute;
     background-color: #282828;
     left: 24px;
+    display: flex;
 }
 
-#options > button {
+#options button {
     padding: 12px 8px 12px 12px;
     cursor: pointer;
     width: fit-content;
@@ -541,7 +542,7 @@ button {
     text-align: left;
 }
 
-#options > button:hover {
+#options button:hover {
     background-color: #3e3e3e;
 }
 

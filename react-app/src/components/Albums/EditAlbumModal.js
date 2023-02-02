@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as albumReducer from '../../store/album'
 import * as songReducer from '../../store/song'
@@ -13,6 +13,7 @@ function EditAlbumModal({album, setShowEditModal}) {
     const [image, setImage] = useState('')
     const [imageUrl, setImageUrl] = useState(album.imageUrl || 'none')
     const [validationErrors, setValidationErrors] = useState([])
+    const [preview, setPreview] = useState('')
 
     function checkExt(name) {
         const allowed = ['png', 'jpg', 'jpeg']
@@ -21,6 +22,12 @@ function EditAlbumModal({album, setShowEditModal}) {
         }
         return true
     }
+
+    useEffect(() => {
+        if(image) {
+            setPreview(URL.createObjectURL(image))
+        } else setPreview('')
+    }, [image])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -56,7 +63,7 @@ function EditAlbumModal({album, setShowEditModal}) {
                     ))}
                 </ul>
                 <form className="edit-form" onSubmit={handleSubmit}>
-                    <div id="edit-image" onClick={() => document.getElementById('selected-file').click()} style={{'backgroundImage': `url(${imageUrl})`, 'cursor': 'pointer'}}>
+                    <div id="edit-image" onClick={() => document.getElementById('selected-file').click()} style={{'backgroundImage': `url(${preview || imageUrl})`, 'cursor': 'pointer'}}>
                         <input id="selected-file" accept="image/*" class="edit-image" type="file" onChange={e => {setImage(e.target.files[0]); setImageUrl(image.name)}} />
                     </div>
                     <input

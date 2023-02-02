@@ -4,14 +4,16 @@ import { SongContext } from '../Providers/SongContext'
 
 function AudioPlayer() {
     const waveRef = useRef()
-    const { currentSong } = useContext(SongContext)
+    const { currentSong, wavesurfer, setWavesurfer } = useContext(SongContext)
 
-    const [wavesurfer, setWavesurfer] = useState('')
+    
     const [isPlaying, setIsPlaying] = useState(true)
     const [isMuted, setIsMuted] = useState(false)
 
     useEffect(() => {
-        if(wavesurfer) wavesurfer.destroy()
+        if(wavesurfer) {
+            wavesurfer.destroy()
+        }
         if (waveRef.current) {
             let wavesurfer = WaveSurfer.create({
                 container: waveRef.current,

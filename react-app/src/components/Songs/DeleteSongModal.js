@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { authenticate } from '../../store/session'
 import * as songReducer from '../../store/song'
+import * as albumReducer from '../../store/album'
 import { SongContext } from '../Providers/SongContext'
 
 function DeleteSong({song, setShowModal}) {
@@ -10,8 +11,10 @@ function DeleteSong({song, setShowModal}) {
     const dispatch = useDispatch()
     const history= useHistory()
     const deleteSong = async (id) => {
+        
         await dispatch(songReducer.remove(id))
         await dispatch(authenticate())
+        await dispatch(albumReducer.load())
         history.push('/user/songs')
         if(currentSong === song) setCurrentSong('')
     }

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as playlistReducer from '../../store/playlist'
+import { authenticate } from "../../store/session"
 
 function EditPlaylistModal({ song: playlist, setShowEditModal }) {
 
@@ -37,6 +38,7 @@ function EditPlaylistModal({ song: playlist, setShowEditModal }) {
         formData.append('image', image)
         formData.append('userId', user.id)
         await dispatch(playlistReducer.update(formData, playlist.id))
+        await dispatch(authenticate())
         setShowEditModal(false)
     }
 

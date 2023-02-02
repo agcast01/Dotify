@@ -32,6 +32,7 @@ function UploadSongForm() {
             albumForm.append('title', title)
             albumForm.append('userId', user.id)
             const newAlbum = await dispatch(albumReducer.create(albumForm))
+            await dispatch(authenticate())
             newAlbumId = newAlbum.id
         }
 

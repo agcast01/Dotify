@@ -6,15 +6,15 @@ function YourAlbumsButton() {
     const history = useHistory()
 
     function handleClick() {
-        if(user !== null) {
+        if (user !== null) {
             return history.push('/your-albums')
         }
     }
 
     return (
-        <button className="sidebar-link" onClick={handleClick} style={user=== null ? {'cursor': 'not-allowed'}: {'cursor': 'pointer'}}> 
-            <span className="material-symbols-outlined" id='liked-icon'>
-                favorite
+        <button className="sidebar-link" onClick={handleClick} style={user === null ? { 'cursor': 'not-allowed' } : { 'cursor': 'pointer' }}>
+            <span class="material-symbols-outlined">
+                web_stories
             </span>
 
             <span>

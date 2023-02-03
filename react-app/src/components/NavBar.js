@@ -40,7 +40,7 @@ const NavBar = ({path, setPath}) => {
           </button>
         </li>
         <li>
-          <button ref={likedSongs} onClick={() => { history.push('/user/songs'); setPath('/user/songs') }} className={path === '/user/songs' ? 'sidebar-link active' : 'sidebar-link'} style={user=== null ? {'cursor': 'not-allowed'}: {'cursor': 'pointer'}}>
+          <button ref={likedSongs} onClick={() => {if(user === null) return ; history.push('/user/songs'); setPath('/user/songs') }} className={path === '/user/songs' ? 'sidebar-link active' : 'sidebar-link'} style={user=== null ? {'cursor': 'not-allowed'}: {'cursor': 'pointer'}}>
             <span className="material-symbols-outlined">
               album
             </span>

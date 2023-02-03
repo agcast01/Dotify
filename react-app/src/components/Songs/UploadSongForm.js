@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Redirect, useHistory } from "react-router-dom"
 import { authenticate } from "../../store/session"
@@ -18,6 +18,8 @@ function UploadSongForm() {
     const [song, setSong] = useState('')
     const [errors, setErrors] = useState([])
     const [albumId, setAlbumId] = useState('new')
+
+    const uploadButton = useRef(null)
 
     useEffect(()=>{
         setErrors([])
@@ -55,7 +57,7 @@ function UploadSongForm() {
         formData.append('albumId', newAlbumId || albumId)
 
         
-
+        uploadButton.current.disabled = true
         await dispatch(songReducer.upload(formData))
         await dispatch(albumReducer.load())
         await dispatch(authenticate())
@@ -107,7 +109,7 @@ function UploadSongForm() {
                     {errors.includes('Song is required') && <p className="error">Song is required</p>}
                     {fileError && <p className="error">{fileError}</p>}
                 </div>
-                <button type='submit' disabled={Boolean(errors.length)} className="login-button">Upload your song</button>
+                <button ref={uploadButton} type='submit' disabled={Boolean(errors.length)} className="login-button">Upload your song</button>
                 <button className="login-button" onClick={() => history.push('/user/songs')}>Cancel</button>
             </form>
         </>

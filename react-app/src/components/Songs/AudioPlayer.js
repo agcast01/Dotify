@@ -6,12 +6,12 @@ function AudioPlayer() {
     const waveRef = useRef()
     const { currentSong, wavesurfer, setWavesurfer } = useContext(SongContext)
 
-    
+
     const [isPlaying, setIsPlaying] = useState(true)
     const [isMuted, setIsMuted] = useState(false)
 
     useEffect(() => {
-        if(wavesurfer) {
+        if (wavesurfer) {
             wavesurfer.destroy()
         }
         if (waveRef.current) {
@@ -25,7 +25,7 @@ function AudioPlayer() {
             setWavesurfer(wavesurfer)
             wavesurfer.load(currentSong.file_name)
         }
-        
+
     }, [currentSong])
 
     function play() {
@@ -33,7 +33,7 @@ function AudioPlayer() {
         setIsPlaying(!isPlaying)
     }
 
-    if(wavesurfer) wavesurfer.on('ready', function () {
+    if (wavesurfer) wavesurfer.on('ready', function () {
         wavesurfer.play()
     })
 
@@ -52,7 +52,7 @@ function AudioPlayer() {
     return (
         <div id='audio-player'>
             <div id='current-song-details'>
-                <div className='currentSong-image' style={{'background-image': `url(${currentSong.imageUrl})`}}></div>
+                <div className='currentSong-image' style={{ 'background-image': `url(${currentSong.imageUrl})` }}></div>
                 <div>
                     <p className='title'>{currentSong.title}</p>
                     <p>{currentSong.user}</p>
@@ -67,13 +67,15 @@ function AudioPlayer() {
                 <div ref={waveRef} id='wave'></div>
             </div>
             <div id='volume-controls'>
+
                 {wavesurfer && isMuted ?
-                    <span class="material-symbols-outlined" onClick={() => {wavesurfer.setMute(!wavesurfer.getMute()); setIsMuted(!isMuted)}}>
+                    <span class="material-symbols-outlined" onClick={() => { wavesurfer.setMute(!wavesurfer.getMute()); setIsMuted(!isMuted) }}>
                         volume_mute
                     </span> :
-                    <span class="material-symbols-outlined" onClick={() => {wavesurfer.setMute(!wavesurfer.getMute()); setIsMuted(!isMuted)}}>
+                    <span class="material-symbols-outlined" onClick={() => { wavesurfer.setMute(!wavesurfer.getMute()); setIsMuted(!isMuted) }}>
                         volume_up
                     </span>}
+                <input type='range' defaultValue={100} max={100} onChange={e => wavesurfer.setVolume(e.target.value / 100)} />
             </div>
         </div>
     )

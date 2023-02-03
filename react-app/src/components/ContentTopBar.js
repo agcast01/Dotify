@@ -13,7 +13,7 @@ function ContentTopBar({ path }) {
     const { theme } = useContext(ThemeContext)
 
     return (
-        <div id={theme}>
+        <>
             <div className={`content-top-bar`} id={theme}>
                 <div className="navArrows">
                     <button className="nav-arrow" onClick={() => history.goBack()}><span className={history.length > 0 ? "material-symbols-outlined active" : "material-symbols-outlined inactive"}>
@@ -35,7 +35,7 @@ function ContentTopBar({ path }) {
                             <span className="material-symbols-outlined">
                                 person
                             </span>
-                            <span>
+                            <span id="username">
                                 {user.username}
                             </span>
                             {!dropMenu && <span className="material-symbols-outlined">
@@ -47,8 +47,8 @@ function ContentTopBar({ path }) {
                                         arrow_drop_up
                                     </span>
                                     <div id='drop-down' onMouseLeave={() => setDropMenu(false)}>
-                                        <div onClick={() => history.push('/new-song')}>Upload Song</div>
-                                        <div onClick={() => history.push('/new-album')}>Create Album</div>
+                                        <button onClick={() => history.push('/new-song')}>Upload Song</button>
+                                        <button onClick={() => history.push('/new-album')}>Create Album</button>
                                         <LogoutButton />
                                     </div>
                                 </>
@@ -58,7 +58,7 @@ function ContentTopBar({ path }) {
                 )}
             </div>
 
-        </div>
+        </>
     )
 }
 

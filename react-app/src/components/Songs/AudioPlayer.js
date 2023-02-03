@@ -4,7 +4,7 @@ import { SongContext } from '../Providers/SongContext'
 
 function AudioPlayer() {
     const waveRef = useRef()
-    const { currentSong, wavesurfer, setWavesurfer } = useContext(SongContext)
+    const { currentSong, setCurrentSong, wavesurfer, setWavesurfer } = useContext(SongContext)
 
 
     const [isPlaying, setIsPlaying] = useState(true)
@@ -39,11 +39,13 @@ function AudioPlayer() {
     if (wavesurfer) wavesurfer.on('ready', function () {
         wavesurfer.play()
         setDuration(getDuration())
-        setIntId(setInterval(getTime, 1000))
+        setIntId(setInterval(getTime, 100))
     })
 
     if (wavesurfer) wavesurfer.on('finish', function() {
         clearInterval(intId)
+        wavesurfer.destroy()
+        setCurrentSong('')
     })
 
     function checkPlay() {
@@ -91,7 +93,7 @@ function AudioPlayer() {
                {wavesurfer &&  <div id='controls'>
 
                     <p>{currentTime}</p>
-                    <input type='range' min={0} max={1} step={.01} value={progress} onChange={e => wavesurfer.seekTo(Number(e.target.value))} />
+                    <input type='range' min={0} max={.99} step={.01} value={progress} onChange={e => wavesurfer.seekTo(Number(e.target.value))} />
                     <p>{duration}</p>
                 </div>}
             </div>

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
+import ContentTopBar from "../ContentTopBar"
 import DeletePlaylistModal from "./DeletePlaylistModal"
 import EditPlaylistModal from "./EditPlaylistModal"
 
@@ -23,8 +24,8 @@ function PlaylistTop({playlistId}) {
         } return false
     }
     return (
-        <div onClick={() => setOptions(false)} >
-        <div className="playlist-info">
+        <>
+        <span className="playlist-info">
             <span className='playlist-image' style={{'backgroundImage': `url(${playlist.imageUrl})`}}>
             </span>
             <span className="playlist-data">
@@ -33,7 +34,7 @@ function PlaylistTop({playlistId}) {
                 {playlist.description && <p className="description">{playlist.description}</p>}
                 <p className="playlist-stats">{playlist.user} • {playlist.songs.length} songs</p>
             </span>
-        </div>
+        </span>
         {showModal && <DeletePlaylistModal song={playlist} setShowModal={setShowModal} />}
             { user !== null && playlist.user === user.username && <div className="drop-div">
                 <button className="more-options" onClick={(e) => {e.stopPropagation(); setOptions(!options)}} >...</button>
@@ -46,7 +47,7 @@ function PlaylistTop({playlistId}) {
                     </div>
                 )}
             </div>}
-        </div>
+        </>
     )
 }
 

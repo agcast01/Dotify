@@ -9,7 +9,7 @@ function YourAlbums({setPath}) {
 
     return (
         <div>
-            <div></div>
+            <h1>Your Albums</h1>
             <div className="card-container">
                 {user.albums.map(album => (
                     <div className="home-card" onClick={() => history.push(`/albums/${album.id}`)}>

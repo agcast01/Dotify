@@ -36,6 +36,7 @@ function EditAlbumModal({album, setShowEditModal}) {
         if(image && checkExt(image.name)) currErrors.push('The file must be a png, jpg, or jpeg file.')
         if(!title.length || !title.replace(/\s/g, '').length) currErrors.push('Must have a title.')
         if(title.length > 30) currErrors.push('Title must be less than 30 characters')
+        if(description.length > 255) currErrors.push('Description must be less than 256 characters')
         setValidationErrors(currErrors)
         if (currErrors.length) return null
 

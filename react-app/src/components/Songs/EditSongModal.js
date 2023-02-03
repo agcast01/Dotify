@@ -18,6 +18,7 @@ function EditSongModal({ song, setShowEditModal }) {
 
         if(!title.length || !title.replace(/\s/g, '').length) currErrors.push('Must have a title.')
         if(title.length > 30) currErrors.push('Title must be less than 30 characters')
+        if(description.length > 255) currErrors.push('Description must be less than 256 characters')
         setValidationErrors(currErrors)
         if (currErrors.length) return null
         await dispatch(songReducer.update({ title, userId: user.id, description }, song.id))

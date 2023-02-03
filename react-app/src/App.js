@@ -58,11 +58,12 @@ function App() {
           <CreateAlbumForm />
         </Route>
         <Route path={'/'}>
-          <div id='main' style={{'height': currentSong ? 'calc(100% - 90px)': '100%'}}>
+          <div id='main' style={{ 'height': currentSong ? 'calc(100% - 90px)' : '100%' }}>
             <SideBar path={path} setPath={setPath} />
             <div className='content'>
               <ContentTopBar path={path} />
               <div className='main-content'>
+
                 <Switch>
                   <Route exact path={'/'}>
                     <Home setPath={setPath} />

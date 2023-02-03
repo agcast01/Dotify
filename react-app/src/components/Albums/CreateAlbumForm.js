@@ -42,6 +42,7 @@ function CreateAlbumForm(){
         if(image && checkExt(image.name)) errors.push('The file must be a png, jpg, or jpeg file.')
         if(!title || !title.replace(/\s/g, '').length) errors.push("Title is required")
         if(title.length > 30) errors.push('Title must be less than 30 characters')
+        if(description.length > 255) errors.push('Description must be less than 256 characters')
         setValidationErrors(errors)
         if (errors.length) return 
         
@@ -73,6 +74,7 @@ function CreateAlbumForm(){
                     value={title}
                     onChange={e => setTitle(e.target.value)}
                 />
+                
             </div>
             <div>
                 <label>Enter the description of your album</label>

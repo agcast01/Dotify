@@ -26,6 +26,17 @@ function UploadSongForm() {
     const handleSubmit = async(e) => {
         e.preventDefault();
         let error = [];
+        if(!title || !title.replace(/\s/g, '').length) error.push("Title is required")
+        if(title.length > 30) error.push("Title must be less than 30 characters")
+        if(!song) error.push('Song is required')
+        if(description.length > 255) error.push('Description must be less than 256 characters')
+        if(error.length) return setErrors(error)
+        if(!song.name.endsWith('.mp3') && !song.name.endsWith('.wav')) {
+            return setFileError('You must upload either an mp3 or wav file')
+        } else {
+            setFileError('')
+        }
+
         let newAlbumId
         if(albumId === 'new') {
             const albumForm = new FormData()
@@ -43,14 +54,7 @@ function UploadSongForm() {
         formData.append('description', description)
         formData.append('albumId', newAlbumId || albumId)
 
-        if(!title || !title.replace(/\s/g, '').length) error.push("Title is required")
-        if(!song) error.push('Song is required')
-        if(error.length) return setErrors(error)
-        if(!song.name.endsWith('.mp3') && !song.name.endsWith('.wav')) {
-            return setFileError('You must upload either an mp3 or wav file')
-        } else {
-            setFileError('')
-        }
+        
 
         await dispatch(songReducer.upload(formData))
         await dispatch(albumReducer.load())
@@ -72,6 +76,7 @@ function UploadSongForm() {
                         onChange={e => setTitle(e.target.value)}
                     />
                     {errors.includes('Title is required') && <p className="error">Title is required</p>}
+                    {errors.includes('Title must be less than 30 characters') && <p className="error">Title must be less than 30 characters</p>}
                 </div>
                 <div>
                     <label>Enter the description of your song</label>
@@ -80,6 +85,7 @@ function UploadSongForm() {
                         value={description}
                         onChange={e => setDescription(e.target.value)}
                     />
+                    {errors.includes('Description must be less than 256 characters') && <p className="error">'Description must be less than 256 characters'</p>}
                 </div>
                 <div>
                     <label>Select the song's album</label>

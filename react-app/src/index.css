@@ -57,6 +57,7 @@ li {
     overflow: auto;
 }
 
+
 .content-top-bar {
     height: 64px;
     position: sticky;
@@ -66,11 +67,14 @@ li {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    position: sticky;
 }
+
+
+
 #red {
     background-color: #ff3636;
 }
+
 .nav-arrow {
     background-color: #090909;
     border-radius: 50%;
@@ -81,12 +85,15 @@ li {
     margin-right: 20px;
 }
 
+
 .main-content {
     background: rgb(31, 31, 31);
     background: linear-gradient(90deg, rgba(31, 31, 31, 0.31) 0%, rgba(18, 18, 18, 1) 100%);
     padding: 0 20px;
     box-sizing: border-box;
 }
+
+
 
 
 .material-symbols-outlined {
@@ -256,7 +263,7 @@ button {
     top: 50px;
     right: 0;
     background-color: #282828;
-    width: 240px;
+    width: 120px;
     padding: 4px;
     font-size: 14px;
     z-index: 1000;
@@ -265,17 +272,18 @@ button {
 #drop-down>* {
     padding: 12px 8px 12px 12px;
     cursor: pointer;
+    display: block;
+    width: 100%;
+    color: white;
 }
 
-#drop-down> *:hover {
+#drop-down>*:hover {
     background-color: #3e3e3e;
 }
 
 .playlist-info {
     padding: 0 20px 20px 20px;
     display: flex;
-    position: relative;
-    z-index: 1;
     width: fit-content;
 }
 
@@ -287,6 +295,7 @@ button {
     display: flex;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.391);
     background-position: center;
+    flex: 0 0 192px;
 }
 
 .playlist-image .material-symbols-outlined {
@@ -306,6 +315,7 @@ button {
 .playlist-data p {
     margin: 0;
 }
+
 .column-headers {
     display: grid;
     grid-gap: 16px;
@@ -315,16 +325,17 @@ button {
     border-bottom: 1px solid #a7a7a739;
     font-size: 12px;
 }
+
 #clock {
     text-align: right;
 }
 
 .empty {
     font-variation-settings:
-    'FILL' 0,
-    'wght' 200,
-    'GRAD' 0,
-    'opsz' 24
+        'FILL' 0,
+        'wght' 200,
+        'GRAD' 0,
+        'opsz' 24
 }
 
 .song {
@@ -388,6 +399,7 @@ button {
     display: flex;
     flex-direction: column;
 }
+
 .modal bold {
     font-weight: bold;
 }
@@ -409,7 +421,7 @@ button {
 
 #cancel {
     margin: auto;
-    
+
 }
 
 #delete {
@@ -418,6 +430,8 @@ button {
 
 #editable-title {
     cursor: pointer;
+    max-width: 600px;
+    overflow-wrap: break-word;
 }
 
 .edit {
@@ -431,6 +445,7 @@ button {
     color: white;
     height: fit-content;
 }
+
 .cancel-button:hover {
     background-color: #3e3e3e;
     border-radius: 50%;
@@ -553,6 +568,8 @@ button {
 #playlist-sidebar {
     border-top: solid 1px #a7a7a7ad;
     margin: 24px 16px 0;
+    height: 300px;
+    overflow: auto;
 }
 
 .edit-image {
@@ -595,10 +612,10 @@ button {
     margin-bottom: 20px;
 }
 
-.home-card p{
+.home-card p {
     margin: 0;
     margin-top: 10px;
-    
+
     width: 185px;
 }
 
@@ -658,6 +675,7 @@ button {
     position: relative;
     display: flex;
     align-items: center;
+    width: fit-content;
 }
 
 #search-icon {

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Redirect, useHistory } from "react-router-dom"
 import { SongContext } from "../Providers/SongContext"
@@ -11,6 +11,7 @@ function CreateAlbumForm(){
     const history = useHistory()
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
+    const uploadButton = useRef(null)
 
     const [title, setTitle] = useState('')
     const [description, setDescription]= useState('')
@@ -51,6 +52,8 @@ function CreateAlbumForm(){
         formData.append('description', description)
         formData.append('image', image)
         formData.append('userId', user.id)
+
+        uploadButton.current.disabled = true
         const newAlbum = await dispatch(albumReducer.create(formData))
         await dispatch(authenticate())
         history.push(`/albums/${newAlbum.id}`)
@@ -94,7 +97,7 @@ function CreateAlbumForm(){
                 />
                 
             </div>
-            <button type="submit" className="login-button" disabled={validationErrors.length}>Create your album</button>
+            <button ref={uploadButton} type="submit" className="login-button" disabled={validationErrors.length}>Create your album</button>
             <button className="login-button" onClick={() => history.push('/')}>Cancel</button>
         </form>
     </>)

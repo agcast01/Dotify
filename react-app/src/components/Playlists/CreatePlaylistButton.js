@@ -1,4 +1,4 @@
-import {useState } from 'react'
+import {useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import * as playlistReducer from '../../store/playlist'
@@ -8,6 +8,7 @@ function CreatePlaylistButton() {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.session.user)
+    const createButton = useRef(null)
     
     const [signUp, toggleSignUp] = useState(false)
 
@@ -18,12 +19,17 @@ function CreatePlaylistButton() {
         const playlistId = await dispatch(playlistReducer.create({title, userId}))
         await dispatch(authenticate())
         history.push(`/playlists/${playlistId}`)
+        createButton.current.disabled = true
+        setTimeout(resetButton, 1000)
+    }
 
+    function resetButton() {
+        createButton.current.disabled=false
     }
 
     return (
         <>
-            <button className={user === null ? 'sidebar-link disabled':"sidebar-link"} onClick={handleClick} style={user=== null ? {'cursor': 'not-allowed'}: {'cursor': 'pointer'}}>
+            <button ref={createButton} className={user === null ? 'sidebar-link disabled':"sidebar-link"} onClick={handleClick} style={user=== null ? {'cursor': 'not-allowed'}: {'cursor': 'pointer'}}>
                 <span className="material-symbols-outlined" id='create-icon'>
                     add
                 </span>

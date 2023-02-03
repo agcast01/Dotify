@@ -35,12 +35,14 @@ const SignUpForm = () => {
 
   useEffect(() => {
     if (!username) return setUserError('Enter a name for your profile')
+    if (username.length > 25) return setUserError('Your profile name must be less than 25 characters.')
     setUserError('')
   }, [username])
 
   useEffect(() => {
     if (!email) return setEmailError('You need to enter your email.');
-    if (!email.includes('@')) return setEmailError("This email is invalid. Make sure it's written like example@email.com");
+    if (email.length > 30) return setEmailError('Your email needs to be less than 30 characters.');
+    if (!email.match(/\w+@\w+[.]\w+/)) return setEmailError("This email is invalid. Make sure it's written like example@email.com");
     setEmailError('')
   }, [email])
 

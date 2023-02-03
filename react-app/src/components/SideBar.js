@@ -10,9 +10,9 @@ function SideBar({path, setPath}){
             <SongPlaylistNavBar path={path}/>
             <PlaylistNavbar path={path}/>
             <div className="about-me">
-                <p className="title">About Me</p>
-                <a href="https://github.com/agcast01" target='_blank' rel="noreferrer noopener">Github</a>
-                <a href="https://linkedin.com" target="_blank" rel="noreferrer noopener">LinkedIn</a>
+                <p>About Me</p>
+                <a href="https://github.com/agcast01" target='_blank' rel="noreferrer noopener"className="sidebar-link">Github</a>
+                <a href="https://linkedin.com" target="_blank" rel="noreferrer noopener" className="sidebar-link">LinkedIn</a>
             </div>
         </div>
     )

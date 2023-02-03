@@ -570,6 +570,8 @@ button {
     margin: 24px 16px 0;
     height: 300px;
     overflow: auto;
+    overflow-x: hidden;
+    overflow-wrap:break-word;
 }
 
 .edit-image {
@@ -713,4 +715,8 @@ button {
     width: 180px;
     height: 180px;
     margin: auto;
+}
+
+#username {
+    margin-left: 8px;
 }

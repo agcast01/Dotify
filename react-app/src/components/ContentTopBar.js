@@ -35,7 +35,7 @@ function ContentTopBar({ path }) {
                             <span className="material-symbols-outlined">
                                 person
                             </span>
-                            <span>
+                            <span id="username">
                                 {user.username}
                             </span>
                             {!dropMenu && <span className="material-symbols-outlined">

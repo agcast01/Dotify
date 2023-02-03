@@ -99,6 +99,7 @@ class Song(db.Model, UserMixin):
     description = Column(String)
     playlistId = Column(Integer, ForeignKey(add_prefix_for_prod('playlists.id')))
     albumId = Column(Integer, ForeignKey(add_prefix_for_prod('albums.id')))
+    length = Column(String, nullable=False)
     user = db.relationship('User', back_populates='songs')
     album = db.relationship('Album', back_populates='songs')
     playlists = db.relationship(
@@ -119,6 +120,7 @@ class Song(db.Model, UserMixin):
             'title': self.title,
             'file_name': self.file_name,
             'description': self.description,
+            'length': self.length,
             'user': self.user.username,
             'userLikes': [user.id for user in self.user_likes],
             'albumTitle': self.album.title,

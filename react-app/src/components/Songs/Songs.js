@@ -50,7 +50,7 @@ function Songs({ songs }) {
                             {user !== null && <button className={checkLiked(song.id) ? "liked" : "not-liked"} onClick={() => likeSong(song.id)}><span className="material-symbols-outlined">
                             favorite
                         </span></button>}
-                        <p className="time">{song.length}</p>
+                        <p>{song.length}</p>
                         </div>
                     </li>
                 ))}

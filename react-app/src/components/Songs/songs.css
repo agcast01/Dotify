@@ -202,5 +202,5 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .time {
    display: flex;
-   justify-content: space-between;
+   justify-content: flex-end;
 }

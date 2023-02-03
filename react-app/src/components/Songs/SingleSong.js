@@ -71,7 +71,7 @@ function SingleSong({ setPath }) {
                 </div>
             </div>
             <div className="buttons">
-                <button className="play-button" onClick={() => setCurrentSong(song)}><span class="material-symbols-outlined">
+                <button className="play-button" onClick={() => setCurrentSong(song)}><span className="material-symbols-outlined">
                     play_arrow
                 </span></button>
                 {user !== null && <button className={checkLiked(song.id)?"liked liked-main" : "not-liked not-liked-main"} 

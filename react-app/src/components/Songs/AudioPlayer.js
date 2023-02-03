@@ -17,6 +17,7 @@ function AudioPlayer() {
     useEffect(() => {
         if (wavesurfer) {
             wavesurfer.destroy()
+            setIsPlaying(true)
         }
         if (waveRef.current) {
             let wavesurfer = WaveSurfer.create({
@@ -42,42 +43,49 @@ function AudioPlayer() {
         setIntId(setInterval(getTime, 100))
     })
 
-    if (wavesurfer) wavesurfer.on('finish', function() {
+    if (wavesurfer) wavesurfer.on('finish', function () {
         clearInterval(intId)
         wavesurfer.destroy()
+        setIsPlaying(false)
         setCurrentSong('')
+    })
+
+    if (wavesurfer) wavesurfer.on('destroy', function () {
+        clearInterval(intId)
     })
 
     function checkPlay() {
         if (wavesurfer) {
             return isPlaying ?
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
                     pause
                 </span> :
-                <span class="material-symbols-outlined">
+                <span className="material-symbols-outlined">
                     play_arrow
                 </span>
         }
     }
     function getTime() {
+
         const seconds = Math.floor(wavesurfer.getCurrentTime())
         const minutes = Math.floor(seconds / 60)
         const remainder = Math.ceil(seconds % 60)
-        setCurrentTime(`${minutes}:${remainder < 10 ? '0' + remainder: remainder}`)
+        setCurrentTime(`${minutes}:${remainder < 10 ? '0' + remainder : remainder}`)
         setProgress(wavesurfer.getCurrentTime() / wavesurfer.getDuration())
+
     }
 
     function getDuration() {
         const seconds = Math.ceil(wavesurfer.getDuration())
         const minutes = Math.floor(seconds / 60)
         const remainder = Math.ceil(seconds % 60)
-        return `${minutes}:${remainder < 10 ? '0' + remainder: remainder}`
+        return `${minutes}:${remainder < 10 ? '0' + remainder : remainder}`
     }
 
     return (
         <div id='audio-player'>
             <div id='current-song-details'>
-                <div className='currentSong-image' style={{ 'background-image': `url(${currentSong.imageUrl})` }}></div>
+                <div className='currentSong-image' style={{ 'background-Image': `url(${currentSong.imageUrl})` }}></div>
                 <div>
                     <p className='title'>{currentSong.title}</p>
                     <p>{currentSong.user}</p>
@@ -89,8 +97,8 @@ function AudioPlayer() {
                         {wavesurfer && checkPlay()}
                     </button>
                 </div>
-                <div ref={waveRef} id='wave' style={{'display': 'hidden'}}></div>
-               {wavesurfer &&  <div id='controls'>
+                <div ref={waveRef} id='wave' style={{ 'display': 'hidden' }}></div>
+                {wavesurfer && <div id='controls'>
 
                     <p>{currentTime}</p>
                     <input type='range' min={0} max={.99} step={.01} value={progress} onChange={e => wavesurfer.seekTo(Number(e.target.value))} />
@@ -100,10 +108,10 @@ function AudioPlayer() {
             <div id='volume-controls'>
 
                 {wavesurfer && isMuted ?
-                    <span class="material-symbols-outlined" onClick={() => { wavesurfer.setMute(!wavesurfer.getMute()); setIsMuted(!isMuted) }}>
+                    <span className="material-symbols-outlined" onClick={() => { wavesurfer.setMute(!wavesurfer.getMute()); setIsMuted(!isMuted) }}>
                         volume_mute
                     </span> :
-                    <span class="material-symbols-outlined" onClick={() => { wavesurfer.setMute(!wavesurfer.getMute()); setIsMuted(!isMuted) }}>
+                    <span className="material-symbols-outlined" onClick={() => { wavesurfer.setMute(!wavesurfer.getMute()); setIsMuted(!isMuted) }}>
                         volume_up
                     </span>}
                 <input type='range' defaultValue={100} max={100} onChange={e => wavesurfer.setVolume(e.target.value / 100)} />

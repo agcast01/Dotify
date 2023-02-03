@@ -13,7 +13,7 @@ function YourAlbumsButton({path}) {
 
     return (
         <button className={path === '/your-albums' ? 'sidebar-link active' : 'sidebar-link'} onClick={handleClick} style={user === null ? { 'cursor': 'not-allowed' } : { 'cursor': 'pointer' }}>
-            <span class="material-symbols-outlined">
+            <span className="material-symbols-outlined">
                 web_stories
             </span>
 

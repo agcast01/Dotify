@@ -9,6 +9,10 @@ function AudioPlayer() {
 
     const [isPlaying, setIsPlaying] = useState(true)
     const [isMuted, setIsMuted] = useState(false)
+    const [duration, setDuration] = useState(0)
+    const [intId, setIntId] = useState('')
+    const [currentTime, setCurrentTime] = useState('0:00')
+    const [progress, setProgress] = useState(0)
 
     useEffect(() => {
         if (wavesurfer) {
@@ -19,8 +23,7 @@ function AudioPlayer() {
                 container: waveRef.current,
                 autoCenter: true,
                 fillParent: true,
-                height: 20,
-                responsive: true
+                height: 0,
             })
             setWavesurfer(wavesurfer)
             wavesurfer.load(currentSong.file_name)
@@ -35,6 +38,12 @@ function AudioPlayer() {
 
     if (wavesurfer) wavesurfer.on('ready', function () {
         wavesurfer.play()
+        setDuration(getDuration())
+        setIntId(setInterval(getTime, 1000))
+    })
+
+    if (wavesurfer) wavesurfer.on('finish', function() {
+        clearInterval(intId)
     })
 
     function checkPlay() {
@@ -47,6 +56,20 @@ function AudioPlayer() {
                     play_arrow
                 </span>
         }
+    }
+    function getTime() {
+        const seconds = Math.floor(wavesurfer.getCurrentTime())
+        const minutes = Math.floor(seconds / 60)
+        const remainder = Math.ceil(seconds % 60)
+        setCurrentTime(`${minutes}:${remainder < 10 ? '0' + remainder: remainder}`)
+        setProgress(wavesurfer.getCurrentTime() / wavesurfer.getDuration())
+    }
+
+    function getDuration() {
+        const seconds = Math.ceil(wavesurfer.getDuration())
+        const minutes = Math.floor(seconds / 60)
+        const remainder = Math.ceil(seconds % 60)
+        return `${minutes}:${remainder < 10 ? '0' + remainder: remainder}`
     }
 
     return (
@@ -64,7 +87,13 @@ function AudioPlayer() {
                         {wavesurfer && checkPlay()}
                     </button>
                 </div>
-                <div ref={waveRef} id='wave'></div>
+                <div ref={waveRef} id='wave' style={{'display': 'hidden'}}></div>
+               {wavesurfer &&  <div id='controls'>
+
+                    <p>{currentTime}</p>
+                    <input type='range' min={0} max={1} step={.01} value={progress} onChange={e => wavesurfer.seekTo(Number(e.target.value))} />
+                    <p>{duration}</p>
+                </div>}
             </div>
             <div id='volume-controls'>
 

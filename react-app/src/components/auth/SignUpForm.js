@@ -40,7 +40,7 @@ const SignUpForm = () => {
 
   useEffect(() => {
     if (!email) return setEmailError('You need to enter your email.');
-    if (!email.includes('@')) return setEmailError("This email is invalid. Make sure it's written like example@email.com");
+    if (!email.match(/\w+@\w+[.]\w+/)) return setEmailError("This email is invalid. Make sure it's written like example@email.com");
     setEmailError('')
   }, [email])
 

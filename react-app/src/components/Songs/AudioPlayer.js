@@ -85,7 +85,7 @@ function AudioPlayer() {
     return (
         <div id='audio-player'>
             <div id='current-song-details'>
-                <div className='currentSong-image' style={{ 'background-Image': `url(${currentSong.imageUrl})` }}></div>
+                <div className='currentSong-image' style={{ 'backgroundImage': `url(${currentSong.imageUrl})` }}></div>
                 <div>
                     <p className='title'>{currentSong.title}</p>
                     <p>{currentSong.user}</p>
@@ -102,7 +102,7 @@ function AudioPlayer() {
 
                     <p>{currentTime}</p>
                     <input type='range' min={0} max={.99} step={.01} value={progress} onChange={e => wavesurfer.seekTo(Number(e.target.value))} />
-                    <p>{duration}</p>
+                    <p>{currentSong.length}</p>
                 </div>}
             </div>
             <div id='volume-controls'>

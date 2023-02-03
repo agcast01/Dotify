@@ -47,6 +47,7 @@ def upgrade():
     sa.Column('file_name', sa.String(), nullable=False),
     sa.Column('description', sa.String(), nullable=True),
     sa.Column('playlistId', sa.Integer(), nullable=True),
+    sa.Column('length', sa.String, nullable=True),
     sa.ForeignKeyConstraint(['playlistId'], ['playlists.id'], ),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')

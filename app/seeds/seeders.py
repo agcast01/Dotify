@@ -91,52 +91,52 @@ def seed_data():
     
     songs = [
         Song(
-            title='Presentation 2.0', albumId=1, file_name="https://dotify-bucket.s3.amazonaws.com/cf20c0cd98774eba841c9ac00e75c01c.mp3", userId=4
+            title='Presentation 2.0', albumId=1, file_name="https://dotify-bucket.s3.amazonaws.com/cf20c0cd98774eba841c9ac00e75c01c.mp3", userId=4, length='2:14'
         ),
         Song(
-            title='Neonscapes ft. ESCP', albumId=2, file_name="https://dotify-bucket.s3.amazonaws.com/a989768f4ced4a90beeb0d56e04875fa.mp3", userId=5
+            title='Neonscapes ft. ESCP', albumId=2, file_name="https://dotify-bucket.s3.amazonaws.com/a989768f4ced4a90beeb0d56e04875fa.mp3", userId=5, length='4:22'
         ),
         Song(
-            albumId=3, title='Positive Corporate', userId=6, file_name="https://dotify-bucket.s3.amazonaws.com/6e1f455efcac4097b6fef7e102d1a5ad.mp3"
+            albumId=3, title='Positive Corporate', userId=6, file_name="https://dotify-bucket.s3.amazonaws.com/6e1f455efcac4097b6fef7e102d1a5ad.mp3", length='3:27'
         ),
         Song(
-            albumId=4, file_name="https://dotify-bucket.s3.amazonaws.com/b3573b599adc46e68c7f06e431767aed.mp3", title='Rise', userId=7
+            albumId=4, file_name="https://dotify-bucket.s3.amazonaws.com/b3573b599adc46e68c7f06e431767aed.mp3", title='Rise', userId=7, length='2:45'
         ),
         Song(
-            albumId=5, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/324e9e2357694133b21fa9d10aea566c.mp3", title='Mvt 1 Trauermarsch'
+            albumId=5, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/324e9e2357694133b21fa9d10aea566c.mp3", title='Mvt 1 Trauermarsch', length='11:33'
         ),
         Song(
-            albumId=5, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/3b73b3cb385b42ec9a3cd2b74f0579b0.mp3", title='Mvt 2 Sturmisch Bewegt'
+            albumId=5, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/3b73b3cb385b42ec9a3cd2b74f0579b0.mp3", title='Mvt 2 Sturmisch Bewegt', length='12:57'
         ),
         Song(
-            albumId=5, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/1595d1f71825415791a3a77c17fa7876.mp3", title='Mvt 3 Scherzo'
+            albumId=5, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/1595d1f71825415791a3a77c17fa7876.mp3", title='Mvt 3 Scherzo', length='17:21'
         ),
         Song(
-            albumId=5, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/41b51de6069c42768a9be757562c505f.mp3", title="Mvt 4 Adagietto & 5 Rondo-Finale "
+            albumId=5, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/41b51de6069c42768a9be757562c505f.mp3", title="Mvt 4 Adagietto & 5 Rondo-Finale ", length='22:28'
         ),
         Song(
-            albumId=6, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/64359d7d47de43a5b15cbfc1f43fe3d8.mp3", title="Mvt 1 Langsam Schleppend"
+            albumId=6, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/64359d7d47de43a5b15cbfc1f43fe3d8.mp3", title="Mvt 1 Langsam Schleppend", length='15:55'
         ),
         Song(
-            albumId=6, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/53a71204f40c4eb7a29f585c67bc42cd.mp3", title="Mvt 2 Kraftig Bewegt"
+            albumId=6, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/53a71204f40c4eb7a29f585c67bc42cd.mp3", title="Mvt 2 Kraftig Bewegt", length='7:21'
         ),
         Song(
-            albumId=6, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/6523fe80cb0b448da5e337512334c953.mp3", title="Mvt 3 Feierlich und Gemessen"
+            albumId=6, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/6523fe80cb0b448da5e337512334c953.mp3", title="Mvt 3 Feierlich und Gemessen", length='10:23'
         ),
         Song(
-            albumId=6, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/2793a0e4d6ad4ff382668918c00df70f.mp3", title="Mvt 4 Sturmisch Bewegt"
+            albumId=6, userId=9, file_name="https://dotify-bucket.s3.amazonaws.com/2793a0e4d6ad4ff382668918c00df70f.mp3", title="Mvt 4 Sturmisch Bewegt", length='18:30'
         ),
         Song(
-            albumId=7, userId=4, file_name="https://dotify-bucket.s3.amazonaws.com/23b5bcbdc8954dda8422fc4b9d6afc03.mp3", title='Presentation'
+            albumId=7, userId=4, file_name="https://dotify-bucket.s3.amazonaws.com/23b5bcbdc8954dda8422fc4b9d6afc03.mp3", title='Presentation', length='2:31'
         ),
         Song(
-            albumId=8, userId=4, file_name="https://dotify-bucket.s3.amazonaws.com/055f173b09a4494aa2a74dac8bac2e84.mp3", title='Together'
+            albumId=8, userId=4, file_name="https://dotify-bucket.s3.amazonaws.com/055f173b09a4494aa2a74dac8bac2e84.mp3", title='Together', length='3:50'
         ),
         Song(
-            albumId=9, userId=6, file_name="https://dotify-bucket.s3.amazonaws.com/498f72e648a940689b05c9a1a8c4d352.mp3", title='Stay Positive'
+            albumId=9, userId=6, file_name="https://dotify-bucket.s3.amazonaws.com/498f72e648a940689b05c9a1a8c4d352.mp3", title='Stay Positive', length='3:54'
         ),
         Song(
-            albumId=10, userId=6, file_name="https://dotify-bucket.s3.amazonaws.com/45cb7adf7ba64c93a259d5fc03886812.mp3", title='Brighten Your Day'
+            albumId=10, userId=6, file_name="https://dotify-bucket.s3.amazonaws.com/45cb7adf7ba64c93a259d5fc03886812.mp3", title='Brighten Your Day', length='3:53'
         )
     ]
 

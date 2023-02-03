@@ -46,10 +46,12 @@ function Songs({ songs }) {
                             <Link to={`/albums/${song.albumId}`} className="title">{song.albumTitle}</Link>
                         </div>
                         <p></p>
-                        <div>
+                        <div className="time">
                             {user !== null && <button className={checkLiked(song.id) ? "liked" : "not-liked"} onClick={() => likeSong(song.id)}><span className="material-symbols-outlined">
                             favorite
-                        </span></button>}</div>
+                        </span></button>}
+                        <p className="time">{song.length}</p>
+                        </div>
                     </li>
                 ))}
             </ul>

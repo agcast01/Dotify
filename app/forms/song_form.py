@@ -8,3 +8,4 @@ class SongForm(FlaskForm):
     userId = IntegerField('userId', validators=[DataRequired()])
     description = StringField('description')
     albumId = IntegerField('albumId')
+    length = StringField('length')

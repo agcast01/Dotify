@@ -18,12 +18,28 @@ function UploadSongForm() {
     const [song, setSong] = useState('')
     const [errors, setErrors] = useState([])
     const [albumId, setAlbumId] = useState('new')
+    const [length, setLength] = useState('')
 
     const uploadButton = useRef(null)
 
     useEffect(()=>{
         setErrors([])
+        if (song){
+            const reader = new FileReader()
+    
+            reader.onload = async function(e) {
+                const audioContext = new window.AudioContext()
+                await audioContext.decodeAudioData(e.target.result, function(buffer) {
+                    const duration = buffer.duration;
+                    setLength(getDuration(duration))
+                    console.log(getDuration(duration))
+                })
+            }
+    
+            reader.readAsArrayBuffer(song)
+        }
     }, [song, title])
+
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -55,6 +71,7 @@ function UploadSongForm() {
         formData.append("userId", user.id)
         formData.append('description', description)
         formData.append('albumId', newAlbumId || albumId)
+        formData.append('length', length)
 
         
         uploadButton.current.disabled = true
@@ -62,6 +79,13 @@ function UploadSongForm() {
         await dispatch(albumReducer.load())
         await dispatch(authenticate())
         return history.push(`/albums/${newAlbumId || albumId}`)
+    }
+
+    function getDuration(time) {
+        const seconds = Math.ceil(time)
+        const minutes = Math.floor(seconds / 60)
+        const remainder = Math.floor(seconds % 60)
+        return `${minutes}:${remainder < 10 ? '0' + remainder : remainder}`
     }
 
     if(user === null) return <Redirect to={'/login'}/>

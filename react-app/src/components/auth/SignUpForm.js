@@ -68,6 +68,16 @@ const SignUpForm = () => {
     setDayError('')
   }, [day])
 
+  useEffect(() => {
+    setYearError('')
+    setUserError('')
+    setEmailError('')
+    setEmailConfError('')
+    setPasswordError('')
+    setMonthError('')
+    setDayError('')
+  }, [])
+
 
 
   const user = useSelector(state => state.session.user);

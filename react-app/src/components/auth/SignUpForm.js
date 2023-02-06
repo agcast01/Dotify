@@ -269,6 +269,7 @@ const SignUpForm = () => {
             <label for='prefer'>Prefer not to say</label>
           </span>
         </div>
+        {genderError && <p className='error'>{genderError}</p>}
       </div>
       <div>
         <button type='submit' id='sign-up-submit' disabled={userError || emailError || emailConfError || passwordError || monthError || dayError || yearError || genderError}>Sign Up</button>
